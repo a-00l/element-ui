@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import MyButton from './components/Button/Button.vue'
+</script>
 
 <template>
-  <div></div>
+  <my-button>登录</my-button>
 </template>
 
 <style scoped></style>
