@@ -1,0 +1,127 @@
+.my-button {
+  padding: 8px 15px;
+  font-size: var(--my-font-size-base);
+  border-radius: var(--my-border-radius-base);
+}
+
+.my-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--my-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.1s;
+  font-weight: var(--my-button-font-weight);
+  -webkit-user-smyect: none;
+  user-smyect: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--my-button-bg-color);
+  border: var(--my-border);
+  border-color: var(--my-button-border-color);
+
+  &:active {
+    color: var(--my-button-active-text-color);
+    border-color: var(--my-button-active-border-color);
+    background-color: var(--my-button-active-bg-color);
+    outline: none;
+  }
+
+  &:hover {
+    color: var(--my-button-hover-text-color);
+    border-color: var(--my-button-hover-border-color);
+    background-color: var(--my-button-hover-bg-color);
+    outline: none;
+  }
+}
+
+.my-button--primary {
+  --my-button-text-color: var(--my-color-white);
+  --my-button-bg-color: var(--my-color-primary);
+  --my-button-border-color: var(--my-color-primary);
+  --my-button-outline-color: var(--my-color-primary-light-5);
+  --my-button-active-color: var(--my-color-primary-dark-2);
+  --my-button-hover-text-color: var(--my-color-white);
+  --my-button-hover-link-text-color: var(--my-color-primary-light-5);
+  --my-button-hover-bg-color: var(--my-color-primary-light-3);
+  --my-button-hover-border-color: var(--my-color-primary-light-3);
+  --my-button-active-bg-color: var(--my-color-primary-dark-2);
+  --my-button-active-border-color: var(--my-color-primary-dark-2);
+  --my-button-disabled-text-color: var(--my-color-white);
+  --my-button-disabled-bg-color: var(--my-color-primary-light-5);
+  --my-button-disabled-border-color: var(--my-color-primary-light-5);
+}
+
+.my-button--success {
+  --my-button-text-color: var(--my-color-white);
+  --my-button-bg-color: var(--my-color-success);
+  --my-button-border-color: var(--my-color-success);
+  --my-button-outline-color: var(--my-color-success-light-5);
+  --my-button-active-color: var(--my-color-success-dark-2);
+  --my-button-hover-text-color: var(--my-color-white);
+  --my-button-hover-link-text-color: var(--my-color-success-light-5);
+  --my-button-hover-bg-color: var(--my-color-success-light-3);
+  --my-button-hover-border-color: var(--my-color-success-light-3);
+  --my-button-active-bg-color: var(--my-color-success-dark-2);
+  --my-button-active-border-color: var(--my-color-success-dark-2);
+  --my-button-disabled-text-color: var(--my-color-white);
+  --my-button-disabled-bg-color: var(--my-color-success-light-5);
+  --my-button-disabled-border-color: var(--my-color-success-light-5);
+}
+
+.my-button--info {
+  --my-button-text-color: var(--my-color-white);
+  --my-button-bg-color: var(--my-color-info);
+  --my-button-border-color: var(--my-color-info);
+  --my-button-outline-color: var(--my-color-info-light-5);
+  --my-button-active-color: var(--my-color-info-dark-2);
+  --my-button-hover-text-color: var(--my-color-white);
+  --my-button-hover-link-text-color: var(--my-color-info-light-5);
+  --my-button-hover-bg-color: var(--my-color-info-light-3);
+  --my-button-hover-border-color: var(--my-color-info-light-3);
+  --my-button-active-bg-color: var(--my-color-info-dark-2);
+  --my-button-active-border-color: var(--my-color-info-dark-2);
+  --my-button-disabled-text-color: var(--my-color-white);
+  --my-button-disabled-bg-color: var(--my-color-info-light-5);
+  --my-button-disabled-border-color: var(--my-color-info-light-5);
+}
+
+.my-button--warning {
+  --my-button-text-color: var(--my-color-white);
+  --my-button-bg-color: var(--my-color-warning);
+  --my-button-border-color: var(--my-color-warning);
+  --my-button-outline-color: var(--my-color-warning-light-5);
+  --my-button-active-color: var(--my-color-warning-dark-2);
+  --my-button-hover-text-color: var(--my-color-white);
+  --my-button-hover-link-text-color: var(--my-color-warning-light-5);
+  --my-button-hover-bg-color: var(--my-color-warning-light-3);
+  --my-button-hover-border-color: var(--my-color-warning-light-3);
+  --my-button-active-bg-color: var(--my-color-warning-dark-2);
+  --my-button-active-border-color: var(--my-color-warning-dark-2);
+  --my-button-disabled-text-color: var(--my-color-white);
+  --my-button-disabled-bg-color: var(--my-color-warning-light-5);
+  --my-button-disabled-border-color: var(--my-color-warning-light-5);
+}
+
+.my-button--danger {
+  --my-button-text-color: var(--my-color-white);
+  --my-button-bg-color: var(--my-color-danger);
+  --my-button-border-color: var(--my-color-danger);
+  --my-button-outline-color: var(--my-color-danger-light-5);
+  --my-button-active-color: var(--my-color-danger-dark-2);
+  --my-button-hover-text-color: var(--my-color-white);
+  --my-button-hover-link-text-color: var(--my-color-danger-light-5);
+  --my-button-hover-bg-color: var(--my-color-danger-light-3);
+  --my-button-hover-border-color: var(--my-color-danger-light-3);
+  --my-button-active-bg-color: var(--my-color-danger-dark-2);
+  --my-button-active-border-color: var(--my-color-danger-dark-2);
+  --my-button-disabled-text-color: var(--my-color-white);
+  --my-button-disabled-bg-color: var(--my-color-danger-light-5);
+  --my-button-disabled-border-color: var(--my-color-danger-light-5);
+}
