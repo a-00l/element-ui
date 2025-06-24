@@ -139,43 +139,47 @@
         ref="btn"
         circle
       >
-        登录
+        1
       </Button>
       <Button
         ref="btn"
         circle
         type="primary"
       >
-        登录
+        1
       </Button>
       <Button
         ref="btn"
         circle
         type="success"
       >
-        登录
+        1
       </Button>
       <Button
         ref="btn"
         circle
         type="info"
       >
-        登录
+        1
       </Button>
       <Button
         ref="btn"
         circle
         type="warning"
       >
-        登录
+        1
       </Button>
       <Button
         ref="btn"
         circle
         type="danger"
       >
-        登录
+        1
       </Button>
+    </div>
+    <div class="button">
+      <Button size="small">登录</Button>
+      <Button size="large">登录</Button>
     </div>
   </div>
 

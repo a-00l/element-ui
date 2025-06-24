@@ -1,0 +1,105 @@
+:root {
+  /* color */
+  --my-color-white: #ffffff;
+  --my-color-black: #000000;
+  --my-color-primary: #409eff;
+  --my-color-primary-light-3: rgb(121.3, 187.1, 255);
+  --my-color-primary-light-5: rgb(159.5, 206.5, 255);
+  --my-color-primary-light-7: rgb(197.7, 225.9, 255);
+  --my-color-primary-light-8: rgb(216.8, 235.6, 255);
+  --my-color-primary-light-9: rgb(235.9, 245.3, 255);
+  --my-color-primary-dark-2: rgb(51.2, 126.4, 204);
+  --my-color-success: #67c23a;
+  --my-color-success-light-3: rgb(148.6, 212.3, 117.1);
+  --my-color-success-light-5: rgb(179, 224.5, 156.5);
+  --my-color-success-light-7: rgb(209.4, 236.7, 195.9);
+  --my-color-success-light-8: rgb(224.6, 242.8, 215.6);
+  --my-color-success-light-9: rgb(239.8, 248.9, 235.3);
+  --my-color-success-dark-2: rgb(82.4, 155.2, 46.4);
+  --my-color-warning: #e6a23c;
+  --my-color-warning-light-3: rgb(237.5, 189.9, 118.5);
+  --my-color-warning-light-5: rgb(242.5, 208.5, 157.5);
+  --my-color-warning-light-7: rgb(247.5, 227.1, 196.5);
+  --my-color-warning-light-8: rgb(250, 236.4, 216);
+  --my-color-warning-light-9: rgb(252.5, 245.7, 235.5);
+  --my-color-warning-dark-2: rgb(184, 129.6, 48);
+  --my-color-danger: #f56c6c;
+  --my-color-danger-light-3: rgb(248, 152.1, 152.1);
+  --my-color-danger-light-5: rgb(250, 181.5, 181.5);
+  --my-color-danger-light-7: rgb(252, 210.9, 210.9);
+  --my-color-danger-light-8: rgb(253, 225.6, 225.6);
+  --my-color-danger-light-9: rgb(254, 240.3, 240.3);
+  --my-color-danger-dark-2: rgb(196, 86.4, 86.4);
+  --my-color-error: #f56c6c;
+  --my-color-error-light-3: rgb(248, 152.1, 152.1);
+  --my-color-error-light-5: rgb(250, 181.5, 181.5);
+  --my-color-error-light-7: rgb(252, 210.9, 210.9);
+  --my-color-error-light-8: rgb(253, 225.6, 225.6);
+  --my-color-error-light-9: rgb(254, 240.3, 240.3);
+  --my-color-error-dark-2: rgb(196, 86.4, 86.4);
+  --my-color-info: #909399;
+  --my-color-info-light-3: rgb(177.3, 179.4, 183.6);
+  --my-color-info-light-5: rgb(199.5, 201, 204);
+  --my-color-info-light-7: rgb(221.7, 222.6, 224.4);
+  --my-color-info-light-8: rgb(232.8, 233.4, 234.6);
+  --my-color-info-light-9: rgb(243.9, 244.2, 244.8);
+  --my-color-info-dark-2: rgb(115.2, 117.6, 122.4);
+
+  --my-bg-color: #ffffff;
+  --my-bg-color-page: #f2f3f5;
+  --my-bg-color-overlay: #ffffff;
+  --my-text-color-primary: #303133;
+  --my-text-color-regular: #606266;
+  --my-text-color-secondary: #909399;
+  --my-text-color-placeholder: #a8abb2;
+  --my-text-color-disabled: #c0c4cc;
+  --my-border-color: #dcdfe6;
+  --my-border-color-light: #e4e7ed;
+  --my-border-color-lighter: #ebeef5;
+  --my-border-color-extra-light: #f2f6fc;
+  --my-border-color-dark: #d4d7de;
+  --my-border-color-darker: #cdd0d6;
+  --my-fill-color: #f0f2f5;
+  --my-fill-color-light: #f5f7fa;
+  --my-fill-color-lighter: #fafafa;
+  --my-fill-color-extra-light: #fafcff;
+  --my-fill-color-dark: #ebedf0;
+  --my-fill-color-darker: #e6e8eb;
+  --my-fill-color-blank: #ffffff;
+
+  /* button */
+  --my-button-active-text-color: var(--my-button-hover-text-color);
+  --my-button-active-border-color: var(--my-color-primary);
+  --my-button-active-bg-color: var(--my-color-primary-light-9);
+
+  --my-button-hover-text-color: var(--my-color-primary);
+  --my-button-hover-bg-color: var(--my-color-primary-light-9);
+  --my-button-hover-border-color: var(--my-color-primary-light-7);
+
+  /* boder */
+  --my-border-width: 1px;
+  --my-border-style: solid;
+  --my-border-color-hover: var(--my-text-color-disabled);
+  --my-border: var(--my-border-width) var(--my-border-style) var(--my-border-color);
+  --my-border-radius-base: 4px;
+  --my-border-radius-small: 2px;
+  --my-border-radius-round: 20px;
+  --my-border-radius-circle: 100%;
+
+  /* font */
+  --my-font-size-extra-large: 20px;
+  --my-font-size-large: 18px;
+  --my-font-size-medium: 16px;
+  --my-font-size-base: 14px;
+  --my-font-size-small: 13px;
+  --my-font-size-extra-small: 12px;
+  --my-font-family:
+    'Hmyvetica Neue', Hmyvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑',
+    Arial, sans-serif;
+  --my-font-weight-primary: 500;
+
+  /* disabled */
+  --my-disabled-bg-color: var(--my-fill-color-light);
+  --my-disabled-text-color: var(--my-text-color-placeholder);
+  --my-disabled-border-color: var(--my-border-color-light);
+}
