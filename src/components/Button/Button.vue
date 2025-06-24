@@ -20,7 +20,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import type { ButtonProps } from './types'
-  import './style.css'
+  import './style.scss'
   defineOptions({
     name: 'MyButton',
   })
