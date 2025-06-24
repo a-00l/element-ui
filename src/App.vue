@@ -11,6 +11,7 @@
 
 <template>
   <Button ref="btn">登录</Button>
+  <a href="#">123123</a>
 </template>
 
 <style scoped></style>
