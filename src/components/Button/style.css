@@ -26,17 +26,17 @@
   border: var(--my-border);
   border-color: var(--my-button-border-color);
 
-  &:active {
-    color: var(--my-button-active-text-color);
-    border-color: var(--my-button-active-border-color);
-    background-color: var(--my-button-active-bg-color);
-    outline: none;
-  }
-
   &:hover {
     color: var(--my-button-hover-text-color);
     border-color: var(--my-button-hover-border-color);
     background-color: var(--my-button-hover-bg-color);
+    outline: none;
+  }
+
+  &:active {
+    color: var(--my-button-active-text-color);
+    border-color: var(--my-button-active-border-color);
+    background-color: var(--my-button-active-bg-color);
     outline: none;
   }
 }

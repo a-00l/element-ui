@@ -72,7 +72,7 @@
   --my-button-active-border-color: var(--my-color-primary);
   --my-button-active-bg-color: var(--my-button-hover-bg-color);
 
-  --my-button-hover-text-color: var(--my-color-primary);
+  --my-button-hover-text-color: var(--my-color-white);
   --my-button-hover-bg-color: var(--my-fill-color-blank);
   --my-button-hover-border-color: var(--my-color-primary);
 
