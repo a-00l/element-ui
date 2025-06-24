@@ -65,6 +65,15 @@
   --my-fill-color-darker: #e6e8eb;
   --my-fill-color-blank: #ffffff;
 
+  /* button */
+  --my-button-active-text-color: var(--my-button-hover-text-color);
+  --my-button-active-border-color: var(--my-color-primary);
+  --my-button-active-bg-color: var(--my-button-hover-bg-color);
+
+  --my-button-hover-text-color: var(--my-color-primary);
+  --my-button-hover-bg-color: var(--my-fill-color-blank);
+  --my-button-hover-border-color: var(--my-color-primary);
+
   /* boder */
   --my-border-width: 1px;
   --my-border-style: solid;
