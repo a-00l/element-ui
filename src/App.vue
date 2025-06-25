@@ -2,15 +2,22 @@
   import { onMounted, ref } from 'vue'
   import Button from './components/Button/Button.vue'
   import type { ButtonInstance } from './components/Button/types'
-
+  import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
+  import Collapse from './components/Collapse/Collapse.vue'
   const btn = ref<ButtonInstance>()
   onMounted(() => {
     console.log(btn.value?.ref)
+    setTimeout(() => {
+      open.value = ['123', '12']
+    }, 2000)
   })
+
+  const open = ref()
 </script>
 
 <template>
   <div class="container-button">
+    <!-- 按钮组件：button -->
     <div class="button">
       <Button ref="btn">登录</Button>
       <Button
@@ -181,9 +188,33 @@
       <Button size="small">登录</Button>
       <Button size="large">登录</Button>
     </div>
-  </div>
 
-  <a href="#">123123</a>
+    <!-- 折叠组件：Collapse -->
+    <Collapse v-model="open">
+      <MyCollapseItem
+        name="123"
+        title="标题"
+      >
+        <h1>123</h1>
+      </MyCollapseItem>
+
+      <MyCollapseItem
+        name="12"
+        title="标题"
+      >
+        <h1>123</h1>
+      </MyCollapseItem>
+
+      <MyCollapseItem
+        name="1"
+        title="标题"
+      >
+        <h1>123</h1>
+      </MyCollapseItem>
+
+      {{ open }}
+    </Collapse>
+  </div>
 </template>
 
 <style scoped>
