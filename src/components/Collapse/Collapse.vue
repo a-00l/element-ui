@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+  import './style.scss'
   import { provide, ref, watch } from 'vue'
   import {
     CollapseContextKey,

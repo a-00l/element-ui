@@ -194,6 +194,7 @@
       <MyCollapseItem
         name="123"
         title="标题"
+        disabled
       >
         <h1>123</h1>
       </MyCollapseItem>
