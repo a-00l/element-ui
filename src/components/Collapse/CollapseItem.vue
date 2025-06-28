@@ -11,7 +11,15 @@
         'is-active': isActive,
       }"
     >
-      <slot name="title">{{ title }}</slot>
+      <span class="el-collapse-item__title">
+        <slot name="title">
+          {{ title }}
+        </slot>
+      </span>
+      <Icon
+        icon="angle-right"
+        class="angle-header"
+      ></Icon>
     </div>
     <!-- 动画组件 -->
     <Transition
@@ -34,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+  import Icon from '../Icon/Icon.vue'
   import './style.scss'
   import { computed, inject } from 'vue'
   import { CollapseContextKey, type CollapseItemProps } from './types'

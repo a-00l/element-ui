@@ -38,12 +38,24 @@
 
   &.is-active {
     border-bottom-color: transparent;
+    .angle-header {
+      transform: rotate(90deg);
+    }
   }
 
   &.is-disabled {
     cursor: not-allowed;
     color: var(--my-disabled-text-color);
   }
+
+  .angle-header {
+    transition: transform 0.3s;
+  }
+}
+
+.el-collapse-item__title {
+  text-align: left;
+  flex: auto;
 }
 
 .my-collapse-item__content {
