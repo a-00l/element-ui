@@ -5,10 +5,11 @@ import './styles/index.scss'
 // 引入图标库
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+// 引入所有图标
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标
-library.add(faUserSecret)
+library.add(fas)
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount('#app')

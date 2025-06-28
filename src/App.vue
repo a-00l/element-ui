@@ -4,13 +4,14 @@
   import type { ButtonInstance } from './components/Button/types'
   import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
   import Collapse from './components/Collapse/Collapse.vue'
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
+  import Icon from './components/Icon/Icon.vue'
   const btn = ref<ButtonInstance>()
+
+  const val = ref('red')
   onMounted(() => {
     console.log(btn.value?.ref)
     setTimeout(() => {
-      open.value = ['123', '12']
+      val.value = 'yellow'
     }, 2000)
   })
 
@@ -18,7 +19,12 @@
 </script>
 
 <template>
-  <font-awesome-icon :icon="['fas', 'user-secret']" />
+  <Icon
+    :icon="['fas', 'user-secret']"
+    size="40px"
+    :color="val"
+  ></Icon>
+  <!-- <font-awesome-icon :icon="['fas', 'user-secret']" /> -->
   <div class="container-button">
     <!-- 按钮组件：button -->
     <div class="button">
