@@ -27,5 +27,5 @@ export interface IconProps {
   spinPulse?: boolean
   spinReverse?: boolean
 
-  color: string
+  color?: string
 }
