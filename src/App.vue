@@ -4,6 +4,8 @@
   import type { ButtonInstance } from './components/Button/types'
   import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
   import Collapse from './components/Collapse/Collapse.vue'
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
   const btn = ref<ButtonInstance>()
   onMounted(() => {
     console.log(btn.value?.ref)
@@ -16,6 +18,7 @@
 </script>
 
 <template>
+  <font-awesome-icon :icon="['fas', 'user-secret']" />
   <div class="container-button">
     <!-- 按钮组件：button -->
     <div class="button">
