@@ -194,8 +194,18 @@
       </Button>
     </div>
     <div class="button">
-      <Button size="small">登录</Button>
-      <Button size="large">登录</Button>
+      <Button
+        size="small"
+        :loading="true"
+        disabled
+        >登录</Button
+      >
+      <Button
+        size="large"
+        type="primary"
+        icon="arrow-up"
+        >登录</Button
+      >
     </div>
 
     <!-- 折叠组件：Collapse -->

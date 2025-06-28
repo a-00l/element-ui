@@ -39,6 +39,13 @@
     outline: none;
   }
 
+  &.is-disabled {
+    color: var(--my-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--my-button-disabled-bg-color);
+    border-color: var(--my-button-disabled-border-color);
+  }
   &.is-plain {
     --my-button-hover-text-color: var(--my-color-primary);
     --my-button-hover-bg-color: var(--my-fill-color-blank);
@@ -53,6 +60,28 @@
     width: 32px;
     border-radius: 50%;
     padding: 8px;
+  }
+
+  &.is-loading {
+    position: relative;
+    pointer-events: none;
+  }
+
+  &.is-loading:before {
+    z-index: 1;
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    border-radius: inherit;
+    background-color: var(--my-mask-color-extra-light);
+  }
+
+  [class*='my-icon'] + span {
+    margin-left: 6px;
   }
 }
 

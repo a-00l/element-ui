@@ -8,16 +8,30 @@
       'is-plain': plain,
       'is-round': round,
       'is-circle': circle,
+      'is-disabled': disabled,
+      'is-loading': loading,
     }"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :type="nativeType"
     :autofocus="autofocus"
   >
-    <slot></slot>
+    <Icon
+      icon="spinner"
+      v-if="loading"
+      spin
+    ></Icon>
+    <Icon
+      :icon="icon"
+      v-if="icon"
+    ></Icon>
+    <span>
+      <slot></slot>
+    </span>
   </button>
 </template>
 
 <script setup lang="ts">
+  import Icon from '../Icon/Icon.vue'
   import { ref } from 'vue'
   import type { ButtonProps } from './types'
   import './style.scss'
