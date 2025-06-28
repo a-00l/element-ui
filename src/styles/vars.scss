@@ -66,7 +66,7 @@
   --my-fill-color-dark: #ebedf0;
   --my-fill-color-darker: #e6e8eb;
   --my-fill-color-blank: #ffffff;
-
+  --my-mask-color-extra-light: rgba(255, 255, 255, 0.3);
   /* button */
   --my-button-active-text-color: var(--my-button-hover-text-color);
   --my-button-active-border-color: var(--my-color-primary);
@@ -75,6 +75,10 @@
   --my-button-hover-text-color: var(--my-color-primary);
   --my-button-hover-bg-color: var(--my-color-primary-light-9);
   --my-button-hover-border-color: var(--my-color-primary-light-7);
+
+  --my-button-disabled-text-color: var(--my-disabled-text-color);
+  --my-button-disabled-bg-color: var(--my-fill-color-blank);
+  --my-button-disabled-border-color: var(--my-border-color-light);
 
   /* boder */
   --my-border-width: 1px;
