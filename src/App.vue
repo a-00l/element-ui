@@ -5,6 +5,8 @@
   import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
   import Collapse from './components/Collapse/Collapse.vue'
   import Icon from './components/Icon/Icon.vue'
+  import Tooltip from './components/Tooltip/Tooltip.vue'
+
   const btn = ref<ButtonInstance>()
 
   const val = ref('red')
@@ -19,12 +21,14 @@
 </script>
 
 <template>
+  <Tooltip content="hello world">
+    <Button type="danger">123</Button>
+  </Tooltip>
   <Icon
     :icon="['fas', 'user-secret']"
     size="40px"
     :color="val"
   ></Icon>
-  <!-- <font-awesome-icon :icon="['fas', 'user-secret']" /> -->
   <div class="container-button">
     <!-- 按钮组件：button -->
     <div class="button">
