@@ -6,9 +6,13 @@
   import Collapse from './components/Collapse/Collapse.vue'
   import Icon from './components/Icon/Icon.vue'
   import Tooltip from './components/Tooltip/Tooltip.vue'
+  import type { TooltipInstance } from './components/Tooltip/types'
+  import type { Options } from '@popperjs/core'
 
+  const option = ref<Partial<Options>>({ placement: 'bottom' })
   const btn = ref<ButtonInstance>()
 
+  const popper = ref<TooltipInstance>()
   const val = ref('red')
   onMounted(() => {
     console.log(btn.value?.ref)
@@ -18,10 +22,18 @@
   })
 
   const open = ref()
+  console.log(popper)
 </script>
 
 <template>
-  <Tooltip content="hello world">
+  <Tooltip
+    content="tooltip"
+    trigger="click"
+    ref="popper"
+    placement="right"
+    :openDelay="1000"
+    :closeDelay="1000"
+  >
     <Button type="danger">123</Button>
   </Tooltip>
   <Icon
@@ -36,7 +48,6 @@
       <Button
         ref="btn"
         type="primary"
-        :class="{ 'my-button--primary': true }"
       >
         登录
       </Button>
@@ -70,6 +81,7 @@
       <Button
         ref="btn"
         plain
+        @click="popper?.show()"
       >
         登录
       </Button>
@@ -77,6 +89,7 @@
         ref="btn"
         plain
         type="primary"
+        @click="popper?.hide()"
       >
         登录
       </Button>
