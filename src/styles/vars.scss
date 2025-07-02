@@ -67,6 +67,9 @@
   --my-fill-color-darker: #e6e8eb;
   --my-fill-color-blank: #ffffff;
   --my-mask-color-extra-light: rgba(255, 255, 255, 0.3);
+
+  --my-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --my-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
   /* button */
   --my-button-active-text-color: var(--my-button-hover-text-color);
   --my-button-active-border-color: var(--my-color-primary);
