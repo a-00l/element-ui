@@ -34,7 +34,7 @@
   import { nextTick, onUnmounted, ref, watch } from 'vue'
   import type { TooltipEmits, TooltipInstance, TooltipProps } from './types'
   import { createPopper, type Instance } from '@popperjs/core'
-  import { debounce } from '../utils/debounce'
+  import { debounce } from '@/utils/debounce'
   defineOptions({
     name: 'MyTooltip',
   })
