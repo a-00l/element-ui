@@ -14,7 +14,7 @@
     <Transition :name="props.transition">
       <div
         v-if="isOpen"
-        v-on="emitTrigger"
+        @mouseenter="openFinal"
         class="my-tooltip__popper"
         ref="popperRef"
       >
@@ -85,7 +85,9 @@
   }
 
   useClickOutside(parentNode, () => {
-    if (props.trigger === 'click' && !props.manual) {
+    if (props.trigger === 'click' && !props.manual && isOpen.value) {
+      debugger
+      console.log(123123)
       close()
     }
   })
@@ -122,11 +124,9 @@
   })
 
   const togglePopper = () => {
-    if (isOpen.value) {
-      close()
-    } else {
-      open()
-    }
+    debugger
+    isOpen.value = !isOpen.value
+    emit('visible-change', isOpen.value)
   }
 
   const attachEvent = () => {
