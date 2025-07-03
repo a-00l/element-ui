@@ -14,6 +14,7 @@
     <Transition :name="props.transition">
       <div
         v-if="isOpen"
+        v-on="emitTrigger"
         class="my-tooltip__popper"
         ref="popperRef"
       >
@@ -33,7 +34,7 @@
   import { nextTick, onUnmounted, ref, watch } from 'vue'
   import type { TooltipEmits, TooltipInstance, TooltipProps } from './types'
   import { createPopper, type Instance } from '@popperjs/core'
-  import { throttle } from '../utils/throttle'
+  import { debounce } from '../utils/debounce'
   defineOptions({
     name: 'MyTooltip',
   })
@@ -47,8 +48,8 @@
     trigger: 'hover',
     manual: false,
     transition: 'fade',
-    openDelay: 0,
-    closeDelay: 0,
+    openDelay: 200,
+    closeDelay: 200,
   })
 
   // trigger事件
@@ -71,6 +72,18 @@
     emit('visible-change', isOpen.value)
   }
 
+  const opendebounce = debounce(open, props.openDelay)
+  const closedebounce = debounce(close, props.closeDelay)
+  const openFinal = () => {
+    closedebounce.cancel()
+    opendebounce()
+  }
+
+  const closeFinal = () => {
+    opendebounce.cancel()
+    closedebounce()
+  }
+
   useClickOutside(parentNode, () => {
     if (props.trigger === 'click' && !props.manual) {
       close()
@@ -81,36 +94,34 @@
   const tooltipShow = () => {
     if (!isOpen.value) return
 
-    nextTick(() => {
-      // dom创建后创建tooplit
-      if (triggerRef.value && popperRef.value) {
-        popperInstance?.destroy()
-        popperInstance = createPopper(triggerRef.value, popperRef.value, {
-          placement: props.placement,
-          ...props.popperOption,
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 20],
-              },
+    // dom创建后创建tooplit
+    if (triggerRef.value && popperRef.value) {
+      popperInstance?.destroy()
+      popperInstance = createPopper(triggerRef.value, popperRef.value, {
+        placement: props.placement,
+        ...props.popperOption,
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 20],
             },
-          ],
-        })
-      }
-    })
+          },
+        ],
+      })
+    }
   }
 
   watch(isOpen, (newValue, oldValue) => {
     if (newValue !== oldValue) {
       emit('visible-change', isOpen.value)
-      tooltipShow()
+      nextTick(() => {
+        tooltipShow()
+      })
     }
   })
 
   const togglePopper = () => {
-    console.log(12123)
-
     if (isOpen.value) {
       close()
     } else {
@@ -120,10 +131,11 @@
 
   const attachEvent = () => {
     if (props.trigger === 'click') {
-      emitTrigger.click = throttle(togglePopper, isOpen.value ? props.closeDelay : props.openDelay)
+      emitTrigger.click = debounce(togglePopper, isOpen.value ? props.closeDelay : props.openDelay)
     } else if (props.trigger === 'hover') {
-      emitParent.mouseenter = throttle(open, props.openDelay)
-      emitParent.mouseleave = throttle(close, props.closeDelay)
+      emitTrigger.mouseenter = openFinal
+
+      emitParent.mouseleave = closeFinal
     }
   }
 
