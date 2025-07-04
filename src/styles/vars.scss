@@ -70,6 +70,12 @@
 
   --my-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
   --my-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+
+  --my-dropdown-menu-box-shadow: var(--my-box-shadow-light);
+  --my-dropdown-menuItem-hover-fill: var(--my-color-primary-light-9);
+  --my-dropdown-menuItem-hover-color: var(--my-color-primary);
+  --my-dropdown-menu-index: 10;
+
   /* button */
   --my-button-active-text-color: var(--my-button-hover-text-color);
   --my-button-active-border-color: var(--my-color-primary);
