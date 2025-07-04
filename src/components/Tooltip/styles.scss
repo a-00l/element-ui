@@ -1,7 +1,6 @@
 .my-tooltip {
   --my-popover-bg-color: var(--my-bg-color-overlay);
   --my-popover-font-size: var(--my-font-size-base);
-  --my-popover-border-color: blue;
   --my-popover-padding: 12px;
   --my-popover-border-radius: 4px;
   display: inline-block;
@@ -38,6 +37,16 @@
       transform: rotate(45deg);
     }
 
+    #arrow.is-light::before {
+      background: var(--my-bg-color-overlay);
+      border: 1px solid var(--my-border-color-light);
+    }
+
+    #arrow.is-dark::before {
+      color: var(--my-bg-color);
+      background: var(--my-text-color-primary);
+      border: 1px solid var(--my-text-color-primary);
+    }
     &[data-popper-placement^='top'] > #arrow {
       bottom: -5px;
     }
@@ -72,6 +81,24 @@
       border-left: 1px solid var(--my-popover-border-color);
       border-bottom: 1px solid var(--my-popover-border-color);
     }
+
+    #arrow .is-dark::before {
+      content: '';
+      border: 1px solid var(--my-text-color-primary);
+      background: var(--my-text-color-primary);
+      right: 0;
+    }
+  }
+
+  .is-dark {
+    color: var(--my-bg-color);
+    background: var(--my-text-color-primary);
+    border: 1px solid var(--my-text-color-primary);
+  }
+
+  .is-light {
+    background: var(--my-bg-color-overlay);
+    border: 1px solid var(--my-border-color-light);
   }
 }
 

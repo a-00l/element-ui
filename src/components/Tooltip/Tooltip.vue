@@ -16,12 +16,20 @@
         v-if="isOpen"
         @mouseenter="openFinal"
         class="my-tooltip__popper"
+        :class="{
+          'is-dark': effect === 'dark',
+          'is-light': effect === 'light',
+        }"
         ref="popperRef"
       >
         <slot name="content">{{ content }}</slot>
         <div
           data-popper-arrow
           id="arrow"
+          :class="{
+            'is-dark': effect === 'dark',
+            'is-light': effect === 'light',
+          }"
         ></div>
       </div>
     </Transition>
@@ -50,6 +58,7 @@
     transition: 'fade',
     openDelay: 200,
     closeDelay: 200,
+    effect: 'dark',
   })
 
   // trigger事件

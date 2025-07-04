@@ -15,6 +15,7 @@ export interface TooltipProps {
   transition?: string;
   openDelay?: number;
   closeDelay?: number;
+  effect?: 'dark' | 'light';
 }
 
 export interface TooltipEmits {
