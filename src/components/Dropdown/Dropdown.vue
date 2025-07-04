@@ -8,6 +8,7 @@
       :openDelay="openDelay"
       :closeDelay="closeDelay"
       @visible-change="visibleChange"
+      effect="light"
     >
       <slot></slot>
       <template #content>
