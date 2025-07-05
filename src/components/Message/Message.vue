@@ -29,6 +29,7 @@
   import Icon from '../Icon/Icon.vue'
   import type { MessageProps } from './types'
   import { getBottomOffset } from './method'
+  import { useEventListener } from '@/hooks/useEventListener'
 
   const props = withDefaults(defineProps<MessageProps>(), {
     type: 'info',
@@ -50,6 +51,14 @@
     top: topOffset.value + 'px',
     zIndex: props.zIndex,
   }))
+
+  // 监听键盘事件，按下Esc则清空message消息提示
+  useEventListener(document, 'keydown', (e: Event) => {
+    const event = e as KeyboardEvent
+    if (event.code === 'Escape') {
+      visible.value = false
+    }
+  })
 
   onMounted(() => {
     visible.value = true
