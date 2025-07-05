@@ -8,7 +8,11 @@
   import Tooltip from './components/Tooltip/Tooltip.vue'
   import type { TooltipInstance } from './components/Tooltip/types'
   import type { Options } from '@popperjs/core'
-
+  import Dropdown from './components/Dropdown/Dropdown.vue'
+  import DropdownItem from './components/Dropdown/DropdownItem.vue'
+  import DropdownMenu from './components/Dropdown/DropdownMenu.vue'
+  import Message from './components/Message/Message.vue'
+  import { createMessage } from './components/Message/method'
   const option = ref<Partial<Options>>({ placement: 'bottom' })
   const btn = ref<ButtonInstance>()
 
@@ -22,19 +26,56 @@
   })
 
   const open = ref()
+  const click = () => {
+    createMessage({
+      message: 'hello world',
+      duration: 2000,
+    })
+  }
   console.log(popper)
 </script>
 
 <template>
+  <Button @click="click"></Button>
+  <!-- <Message
+    message="asdasadsasddas"
+    showClose
+    :duration="2000"
+  ></Message>
+  <Message
+    message="you"
+    showClose
+    :duration="2000"
+  ></Message>
+  <Message
+    message="helow"
+    showClose
+    :duration="0"
+  ></Message> -->
+  <Dropdown
+    placement="right"
+    trigger="click"
+  >
+    <span>click</span>
+    <template #dropdown>
+      <DropdownMenu>
+        <DropdownItem> 123 </DropdownItem>
+        <DropdownItem> 123 </DropdownItem>
+        <DropdownItem> 123 </DropdownItem>
+      </DropdownMenu>
+    </template>
+  </Dropdown>
   <Tooltip
     content="tooltip"
-    trigger="click"
     ref="popper"
     placement="right"
-    :openDelay="1000"
-    :closeDelay="1000"
+    trigger="click"
   >
     <Button type="danger">123</Button>
+    <template #content>
+      <div>123</div>
+      <h2>123</h2>
+    </template>
   </Tooltip>
   <Icon
     :icon="['fas', 'user-secret']"

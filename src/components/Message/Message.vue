@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, watch } from 'vue'
   import Icon from '../Icon/Icon.vue'
   import type { MessageProps } from './types'
 
@@ -41,6 +41,13 @@
       }, props.duration)
     }
   }
+
+  watch(visible, (newVisible) => {
+    // 关闭message的同时销毁dom节点
+    if (!newVisible) {
+      props.onDestroy()
+    }
+  })
 
   onMounted(() => {
     visible.value = true
