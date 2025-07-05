@@ -45,8 +45,11 @@
   const topOffset = computed(() => lastOffset.value + props.offset)
   // 计算当前实例的bottomOffset
   const bottomOffset = computed(() => topOffset.value + height.value)
-  // 计算偏移值
-  const cssStyle = computed(() => ({ top: topOffset.value + 'px' }))
+  // 计算css属性
+  const cssStyle = computed(() => ({
+    top: topOffset.value + 'px',
+    zIndex: props.zIndex,
+  }))
 
   onMounted(() => {
     visible.value = true

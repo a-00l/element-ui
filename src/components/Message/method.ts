@@ -1,14 +1,18 @@
 import { render, h, shallowReactive } from 'vue'
 import type { CreateMessage, MessageArray } from './types'
 import MessageConstructor from './Message.vue'
+import { useZindex } from '@/hooks/useZindx'
 
 // 存储所有message消息
 const messageArray: MessageArray[] = shallowReactive([])
 // id自增
 let countId = 1
+
 export const createMessage = (props: CreateMessage) => {
   const id = `message_${countId++}`
   const container = document.createElement('div')
+  // zIndex自增
+  const { addIndex } = useZindex()
   const Destroy = () => {
     // 在数组中查询该message是否存在
     const index = messageArray.findIndex(item => item.id === id)
@@ -31,6 +35,7 @@ export const createMessage = (props: CreateMessage) => {
   const newPrpos = {
     ...props,
     id,
+    zIndex: addIndex(),
     onDestroy: Destroy,
   }
 

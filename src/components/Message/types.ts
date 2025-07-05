@@ -7,6 +7,7 @@ export interface MessageProps {
   showClose?: boolean;
   offset?: number;
   id: string;
+  zIndex: number;
   onDestroy: () => void;
 }
 
@@ -18,5 +19,5 @@ export interface MessageArray {
   destroy: () => void;
 }
 
-type filter = 'onDestroy' | 'id'
+type filter = 'onDestroy' | 'id' | 'zIndex'
 export type CreateMessage = Omit<MessageProps, filter>
