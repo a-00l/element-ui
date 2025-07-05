@@ -21,10 +21,17 @@ export const createMessage = (props: CreateMessage) => {
     render(null, container)
   }
 
+  const manualDestroy = () => {
+    const index = messageArray.findIndex(item => item.id === id)
+
+    // 手动关闭message
+    messageArray[index].vm.exposed!.visible.value = false
+  }
+
   const newPrpos = {
     ...props,
     id,
-    onDestroy: Destroy
+    onDestroy: Destroy,
   }
 
   const vnode = h(MessageConstructor, newPrpos)
@@ -32,15 +39,20 @@ export const createMessage = (props: CreateMessage) => {
   // 将虚拟节点nvode挂载到container中
   // 并渲染为真实dom节点
   render(vnode, container)
-  // 将id和props添加到messageArray中
-  messageArray.push({
+  // 实例对象添加
+  const instance = {
     VNode: vnode,
     id,
     props: newPrpos,
     vm: vnode.component!,
-  })
+    destroy: manualDestroy
+  }
+
+  messageArray.push(instance)
 
   document.body.appendChild(container.firstElementChild!)
+
+  return instance
 }
 
 // 返回数组最后一个元素

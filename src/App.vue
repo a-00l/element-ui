@@ -27,10 +27,14 @@
 
   const open = ref()
   const click = () => {
-    createMessage({
+    const msg = createMessage({
       message: 'hello world',
-      duration: 2000,
+      duration: 0,
     })
+
+    setTimeout(() => {
+      msg.destroy()
+    }, 2000)
   }
 </script>
 

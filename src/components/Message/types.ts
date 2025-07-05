@@ -14,7 +14,9 @@ export interface MessageArray {
   id: string;
   props: MessageProps;
   VNode: VNode;
-  vm: ComponentInternalInstance
+  vm: ComponentInternalInstance;
+  destroy: () => void;
 }
 
-export type CreateMessage = Omit<MessageProps, 'onDestroy' | 'id'>
+type filter = 'onDestroy' | 'id'
+export type CreateMessage = Omit<MessageProps, filter>

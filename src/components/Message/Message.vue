@@ -37,8 +37,8 @@
   })
 
   const messageRef = ref<HTMLDivElement>()
+  // 获取message高度
   const height = ref(0)
-
   // 获取最后一个实例的bottomOffset
   const lastOffset = computed(() => getBottomOffset(props.id))
   // 计算当前实例的topOffset
@@ -47,10 +47,6 @@
   const bottomOffset = computed(() => topOffset.value + height.value)
   // 计算偏移值
   const cssStyle = computed(() => ({ top: topOffset.value + 'px' }))
-
-  defineExpose({
-    bottomOffset,
-  })
 
   onMounted(() => {
     visible.value = true
@@ -78,6 +74,11 @@
     if (!newVisible) {
       props.onDestroy()
     }
+  })
+
+  defineExpose({
+    bottomOffset,
+    visible,
   })
 </script>
 
