@@ -24,6 +24,7 @@
     "verbatimModuleSyntax": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "lib": ["ES2022", "DOM"]
   }
 }

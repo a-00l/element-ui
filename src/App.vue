@@ -32,7 +32,6 @@
       duration: 2000,
     })
   }
-  console.log(popper)
 </script>
 
 <template>
