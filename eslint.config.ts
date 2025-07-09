@@ -22,6 +22,7 @@ export default defineConfigWithVueTs(
   {
     rules: {
       'vue/multi-word-component-names': 'off',
+      'vue/script-setup-lang-require': ['error', { allowNoLang: true }]
     },
   },
 )
