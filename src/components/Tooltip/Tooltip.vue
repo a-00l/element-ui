@@ -37,7 +37,6 @@
 </template>
 
 <script setup lang="ts">
-  import './styles.scss'
   import { useClickOutside } from '@/hooks/useClickOutside'
   import { nextTick, onUnmounted, ref, watch } from 'vue'
   import type { TooltipEmits, TooltipInstance, TooltipProps } from './types'

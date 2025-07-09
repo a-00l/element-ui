@@ -34,7 +34,6 @@
   import Icon from '../Icon/Icon.vue'
   import { ref } from 'vue'
   import type { ButtonProps } from './types'
-  import './style.scss'
   defineOptions({
     name: 'MyButton',
   })

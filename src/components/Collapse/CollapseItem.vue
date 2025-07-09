@@ -43,7 +43,6 @@
 
 <script setup lang="ts">
   import Icon from '../Icon/Icon.vue'
-  import './style.scss'
   import { computed, inject } from 'vue'
   import { CollapseContextKey, type CollapseItemProps } from './types'
   defineOptions({
