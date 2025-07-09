@@ -23,6 +23,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@popperjs/core": "^2.11.8",
     "@rolldown/pluginutils": "1.0.0-beta.8-commit.56abf23",
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.4.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
