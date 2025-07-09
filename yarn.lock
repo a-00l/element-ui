@@ -3047,6 +3047,11 @@ sass@^1.89.2:
   optionalDependencies:
     "@parcel/watcher" "^2.4.1"
 
+search-insights@^1:
+  version "1.10.0"
+  resolved "https://registry.npmjs.org/search-insights/-/search-insights-1.10.0.tgz#cb05d7aaa4c295b5ef5ab31daff789735ec36872"
+  integrity sha512-tl+BINReavk49wOE4F0i+ecKgOQxQSuxDrYZvmJavQ7+pj5FWZ/ybOBTZFNzkbndQYY6rCH0z5Xw/lB+e+JoNg==
+
 semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"

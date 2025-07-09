@@ -2,6 +2,13 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  vite: {
+    css: {
+      postcss: {
+        map: true
+      }
+    }
+  },
   title: "My element-plus",
   description: "仿写element-plus",
   themeConfig: {
