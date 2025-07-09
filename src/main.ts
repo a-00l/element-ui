@@ -8,8 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // 引入所有图标
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
+export const app = createApp(App)
 // 添加图标
 library.add(fas)
-createApp(App)
+app
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount('#app')

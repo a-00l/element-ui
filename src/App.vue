@@ -11,8 +11,8 @@
   import Dropdown from './components/Dropdown/Dropdown.vue'
   import DropdownItem from './components/Dropdown/DropdownItem.vue'
   import DropdownMenu from './components/Dropdown/DropdownMenu.vue'
-  import Message from './components/Message/Message.vue'
   import { createMessage } from './components/Message/method'
+  import Message from './components/Message/Message.vue'
   const option = ref<Partial<Options>>({ placement: 'bottom' })
   const btn = ref<ButtonInstance>()
 
@@ -26,35 +26,56 @@
   })
 
   const open = ref()
+  let count = 0
   const click = () => {
-    const msg = createMessage({
-      message: 'hello world',
+    createMessage({
+      message: `hello world${count++}`,
       duration: 0,
+      showClose: true,
     })
-
-    setTimeout(() => {
-      msg.destroy()
-    }, 2000)
   }
+
+  createMessage({
+    message: 'hello world',
+    type: 'info',
+    duration: 0,
+    showClose: true,
+  })
+
+  createMessage({
+    message: 'hello world',
+    type: 'success',
+    duration: 0,
+    showClose: true,
+  })
+
+  createMessage({
+    message: 'hello world',
+    type: 'warning',
+    duration: 0,
+    showClose: true,
+  })
+
+  createMessage({
+    message: 'hello world',
+    type: 'error',
+    duration: 0,
+    showClose: true,
+  })
+
+  createMessage({
+    message: 'hello world',
+    type: 'primary',
+    duration: 0,
+    showClose: true,
+  })
 </script>
 
 <template>
+  <div class="my-message__close">
+    <Icon icon="xmark" />
+  </div>
   <Button @click="click"></Button>
-  <!-- <Message
-    message="asdasadsasddas"
-    showClose
-    :duration="2000"
-  ></Message>
-  <Message
-    message="you"
-    showClose
-    :duration="2000"
-  ></Message>
-  <Message
-    message="helow"
-    showClose
-    :duration="0"
-  ></Message> -->
   <Dropdown
     placement="right"
     trigger="click"

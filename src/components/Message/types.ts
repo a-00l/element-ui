@@ -8,6 +8,10 @@ export interface MessageProps {
   offset?: number;
   id: string;
   zIndex: number;
+  /**
+   * @description 自定义过渡动画
+   */
+  transitionName?: string;
   onDestroy: () => void;
 }
 

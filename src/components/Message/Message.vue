@@ -1,40 +1,48 @@
 <template>
-  <div
-    role="alert"
-    class="my-message"
-    :class="{
-      [`my-message--${type}`]: type,
-      'is-close': showClose,
-    }"
-    v-show="visible"
-    ref="messageRef"
-    :style="cssStyle"
+  <Transition
+    :name="transitionName"
+    @enter="handleBeforeEnter"
+    @after-leave="handelLeaveTo"
   >
-    <div class="my-message__content">{{ message }}</div>
-    topOffset: {{ topOffset }} - bottomOffset:{{ bottomOffset }} - height:{{ height }}
     <div
-      class="my-message__close"
-      v-if="showClose"
+      role="alert"
+      class="my-message"
+      :class="{
+        [`my-message--${type}`]: type,
+        'is-close': showClose,
+      }"
+      v-show="visible"
+      ref="messageRef"
+      :style="cssStyle"
+      @mouseenter="clearTimer"
+      @mouseleave="messageHandle"
     >
-      <Icon
-        icon="xmark"
-        @click="visible = false"
-      />
+      <div class="my-message__content">{{ message }}</div>
+      <div
+        class="my-message__close"
+        v-if="showClose"
+      >
+        <Icon
+          icon="xmark"
+          @click.stop="deleteMessage(id)"
+        />
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
-  import { computed, nextTick, onMounted, ref, watch } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
   import Icon from '../Icon/Icon.vue'
   import type { MessageProps } from './types'
-  import { getBottomOffset } from './method'
+  import { getBottomOffset, deleteMessage } from './method'
   import { useEventListener } from '@/hooks/useEventListener'
 
   const props = withDefaults(defineProps<MessageProps>(), {
     type: 'info',
     duration: 3000,
     offset: 10,
+    transitionName: 'fade-up',
   })
 
   const messageRef = ref<HTMLDivElement>()
@@ -63,30 +71,36 @@
   onMounted(() => {
     visible.value = true
     messageHandle()
-    nextTick(() => {
-      // 获取当前message的高度
-      if (messageRef.value) {
-        height.value = messageRef.value?.getBoundingClientRect().height
-      }
-    })
   })
+
+  let timer: number
   // 控制message的显示
   const visible = ref(false)
   // 关闭message
   const messageHandle = () => {
     if (props.duration) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         visible.value = false
       }, props.duration)
     }
   }
 
-  watch(visible, (newVisible) => {
-    // 关闭message的同时销毁dom节点
-    if (!newVisible) {
-      props.onDestroy()
+  // 清除定时器
+  const clearTimer = () => {
+    if (timer) {
+      clearTimeout(timer)
     }
-  })
+  }
+
+  const handelLeaveTo = () => {
+    props.onDestroy()
+  }
+
+  const handleBeforeEnter = () => {
+    if (messageRef.value) {
+      height.value = messageRef.value?.getBoundingClientRect().height
+    }
+  }
 
   defineExpose({
     bottomOffset,
