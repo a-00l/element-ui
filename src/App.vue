@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, useSlots } from 'vue'
   import Button from './components/Button/Button.vue'
   import type { ButtonInstance } from './components/Button/types'
   import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
@@ -13,6 +13,7 @@
   import DropdownMenu from './components/Dropdown/DropdownMenu.vue'
   import { createMessage } from './components/Message/method'
   import Message from './components/Message/Message.vue'
+  import Input from './components/Input/Input.vue'
   const option = ref<Partial<Options>>({ placement: 'bottom' })
   const btn = ref<ButtonInstance>()
 
@@ -72,6 +73,20 @@
 </script>
 
 <template>
+  <Input prefix-icon="前缀">
+    <template #prepend>
+      <Icon icon="user" />
+    </template>
+    <template #append>
+      <Icon icon="user" />
+    </template>
+  </Input>
+  <div>
+    <span v-if="$slots.Default">
+      <slot></slot>
+    </span>
+    <slot name="name"></slot>
+  </div>
   <div class="my-message__close">
     <Icon icon="xmark" />
   </div>
