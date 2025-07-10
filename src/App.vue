@@ -73,6 +73,17 @@
 
   const input = ref()
   const input1 = ref()
+  const inputValue = ref()
+  // const inputRef = ref()
+  // console.log(inputRef)
+  // setTimeout(() => {
+  //   inputRef.value?.focus()
+  // }, 2000)
+
+  // setTimeout(() => {
+  //   inputRef.value?.blur()
+  //   inputRef.value?.clear()
+  // }, 3000)
 </script>
 
 <template>
@@ -92,7 +103,15 @@
   <Input
     prefix-icon="前缀"
     v-model="input1"
-    show-password
+    clearable
+  ></Input>
+  <Input
+    v-model="inputValue"
+    autocomplete="off"
+    name="myInputName"
+    max="100"
+    min="0"
+    step="1"
   ></Input>
   <div>
     <span v-if="$slots.Default">

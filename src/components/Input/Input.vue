@@ -34,6 +34,8 @@
 
         <!-- input -->
         <input
+          ref="inputRef"
+          v-bind="$attrs"
           class="el-input__inner"
           :type="inputType"
           :disabled="disabled"
@@ -41,6 +43,7 @@
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
+          @change="handleChange"
           @keydown.enter="emit('change', modelValue)"
         />
 
@@ -80,8 +83,15 @@
     </template>
     <template v-else>
       <textarea
+        ref="inputRef"
         v-model="modelValue"
+        v-bind="$attrs"
+        :disabled="disabled"
         @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @change="handleChange"
+        @keydown.enter="emit('change', modelValue)"
       ></textarea>
     </template>
   </div>
@@ -93,8 +103,10 @@
   import type { InputEmits, InputProps } from './types'
   defineOptions({
     name: 'MyInput',
+    inheritAttrs: false,
   })
 
+  const inputRef = ref<HTMLInputElement>()
   const props = withDefaults(defineProps<InputProps>(), {
     type: 'text',
   })
@@ -128,13 +140,21 @@
 
   // focus
   const handleFocus = (even: FocusEvent) => {
+    // 避免重复调用
+    if (isFocus.value) return
+
     isFocus.value = true
+    inputRef.value?.focus()
     emit('focus', even)
   }
 
   // blur
   const handleBlur = (even: FocusEvent) => {
+    // 避免重复调用
+    if (!isFocus.value) return
+
     isFocus.value = false
+    inputRef.value?.blur()
     emit('blur', even)
     // 失去焦点触发change事件
     emit('change', modelValue.value)
@@ -167,6 +187,13 @@
     () => props.modelValue,
     (newValue) => (modelValue.value = newValue),
   )
+
+  defineExpose({
+    ref: inputRef,
+    blur: handleBlur,
+    clear,
+    focus: handleFocus,
+  })
 </script>
 
 <style scoped></style>
