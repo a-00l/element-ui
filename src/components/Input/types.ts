@@ -6,6 +6,7 @@ export interface InputProps {
   disabled?: boolean;
   prefixIcon?: string;
   suffixIcon?: string;
+  clearable?: boolean;
 }
 
 export interface InputEmits {

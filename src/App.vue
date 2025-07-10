@@ -78,6 +78,7 @@
   <Input
     prefix-icon="前缀"
     v-model="input"
+    clearable
   >
     <template #prepend>
       <Icon icon="user" />
