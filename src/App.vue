@@ -88,30 +88,13 @@
 
 <template>
   <Input
-    prefix-icon="前缀"
-    v-model="input"
-    clearable
-  >
-    <template #prepend>
-      <Icon icon="user" />
-    </template>
-    <template #append>
-      <Icon icon="user" />
-    </template>
-  </Input>
-
-  <Input
-    prefix-icon="前缀"
-    v-model="input1"
+    v-model="inputValue"
     clearable
   ></Input>
+
   <Input
     v-model="inputValue"
-    autocomplete="off"
-    name="myInputName"
-    max="100"
-    min="0"
-    step="1"
+    show-password
   ></Input>
   <div>
     <span v-if="$slots.Default">

@@ -54,21 +54,24 @@
         >
           <Icon
             icon="times-circle"
-            @click="clear"
+            @mousedown="clear"
             v-if="isClearable"
-          ></Icon>
+          >
+          </Icon>
 
           <Icon
             icon="eye"
             v-if="isPwdShow && isPassword"
             @click="togglePwdVisible"
-          ></Icon>
+          >
+          </Icon>
 
           <Icon
             icon="eye-slash"
-            v-else="isPwdShow && !isPassword"
+            v-if="isPwdShow && !isPassword"
             @click="togglePwdVisible"
-          ></Icon>
+          >
+          </Icon>
           <slot name="suffix"></slot>
         </span>
       </div>
@@ -116,12 +119,17 @@
   // 控制清空功能
   const isFocus = ref(false)
   // 判断是否可以清空
-  const isClearable = computed(
-    () => !!modelValue.value && props.clearable && isFocus.value && !props.disabled,
-  )
+  const isClearable = computed(() => {
+    const result = !!modelValue.value && props.clearable && isFocus.value && !props.disabled
+    console.log('isClearable:', result)
+    console.log('isPwdShow:', isPwdShow.value)
+
+    return result
+  })
+
   // 控制密码是否可见
   const isPassword = ref(false)
-  // 判断是否可见
+  // // 判断是否可见
   const isPwdShow = computed(() => props.showPassword && !!modelValue.value && !props.disabled)
 
   // 计算input的type
@@ -143,6 +151,7 @@
     // 避免重复调用
     if (isFocus.value) return
 
+    debugger
     isFocus.value = true
     inputRef.value?.focus()
     emit('focus', even)
@@ -153,15 +162,16 @@
     // 避免重复调用
     if (!isFocus.value) return
 
-    isFocus.value = false
-    inputRef.value?.blur()
     emit('blur', even)
     // 失去焦点触发change事件
     emit('change', modelValue.value)
+    isFocus.value = false
+    inputRef.value?.blur()
   }
 
   // 清空input
   const clear = () => {
+    debugger
     modelValue.value = ''
     emit('update:modelValue', '')
     emit('input', '')
