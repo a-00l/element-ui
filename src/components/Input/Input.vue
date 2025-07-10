@@ -35,7 +35,7 @@
         <!-- input -->
         <input
           class="el-input__inner"
-          :type="type"
+          :type="inputType"
           :disabled="disabled"
           v-model="modelValue"
           @input="handleInput"
@@ -45,13 +45,25 @@
 
         <!-- suffix -->
         <span
-          v-if="$slots.suffix || isClearable"
+          v-if="$slots.suffix || isClearable || isPwdShow"
           class="el-input__suffix"
         >
           <Icon
             icon="times-circle"
             @click="clear"
             v-if="isClearable"
+          ></Icon>
+
+          <Icon
+            icon="eye"
+            v-if="isPwdShow && isPassword"
+            @click="togglePwdVisible"
+          ></Icon>
+
+          <Icon
+            icon="eye-slash"
+            v-else="isPwdShow && !isPassword"
+            @click="togglePwdVisible"
           ></Icon>
           <slot name="suffix"></slot>
         </span>
@@ -88,9 +100,29 @@
 
   // 输入框绑定
   const modelValue = ref(props.modelValue)
+  // 控制清空功能
   const isFocus = ref(false)
   // 判断是否可以清空
   const isClearable = computed(() => !!modelValue.value && props.clearable && isFocus.value)
+  // 控制密码是否可见
+  const isPassword = ref(false)
+  // 判断是否可见
+  const isPwdShow = computed(() => props.showPassword && !!modelValue.value && !props.disabled)
+
+  // 计算input的type
+  const inputType = computed(() => {
+    if (props.showPassword) {
+      return isPassword.value ? 'text' : 'password'
+    }
+
+    return props.type
+  })
+
+  // 切换密码是否可见
+  const togglePwdVisible = () => {
+    isPassword.value = !isPassword.value
+  }
+
   // focus
   const handleFocus = () => {
     isFocus.value = true

@@ -72,6 +72,7 @@
   })
 
   const input = ref()
+  const input1 = ref()
 </script>
 
 <template>
@@ -87,6 +88,12 @@
       <Icon icon="user" />
     </template>
   </Input>
+
+  <Input
+    prefix-icon="前缀"
+    v-model="input1"
+    show-password
+  ></Input>
   <div>
     <span v-if="$slots.Default">
       <slot></slot>
