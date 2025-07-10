@@ -1,0 +1,24 @@
+:root {
+  --my-c-brand: var(--vk-color-primary);
+  --my-c-brand-light: var(--vk-color-primary-light-3);
+  --my-c-brand-lighter: var(--vk-color-primary-light-5);
+  --my-c-brand-dark: var(--vk-color-primary-dark-2);
+  --my-c-brand-darker: #265f99;
+
+  --component-preview-bg: var(--my-code-block-bg);
+  --component-preview-soft: var(--my-code-block-bg-light);
+}
+
+body {
+  color: var(--my-c-text-1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: var(--my-c-text-1);
+}
