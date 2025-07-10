@@ -103,7 +103,9 @@
   // 控制清空功能
   const isFocus = ref(false)
   // 判断是否可以清空
-  const isClearable = computed(() => !!modelValue.value && props.clearable && isFocus.value)
+  const isClearable = computed(
+    () => !!modelValue.value && props.clearable && isFocus.value && !props.disabled,
+  )
   // 控制密码是否可见
   const isPassword = ref(false)
   // 判断是否可见
