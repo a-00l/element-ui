@@ -4,6 +4,10 @@
   border-radius: var(--my-border-radius-base);
 }
 
+.my-button + .my-button {
+  margin-left: 12px;
+}
+
 .my-button {
   display: inline-flex;
   justify-content: center;
