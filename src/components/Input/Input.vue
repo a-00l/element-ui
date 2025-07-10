@@ -41,6 +41,7 @@
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
+          @keydown.enter="emit('change', modelValue)"
         />
 
         <!-- suffix -->
@@ -126,25 +127,39 @@
   }
 
   // focus
-  const handleFocus = () => {
+  const handleFocus = (even: FocusEvent) => {
     isFocus.value = true
+    emit('focus', even)
   }
 
   // blur
-  const handleBlur = () => {
+  const handleBlur = (even: FocusEvent) => {
     isFocus.value = false
+    emit('blur', even)
+    // 失去焦点触发change事件
+    emit('change', modelValue.value)
   }
 
   // 清空input
   const clear = () => {
     modelValue.value = ''
     emit('update:modelValue', '')
+    emit('input', '')
+    emit('change', '')
+    emit('clear')
   }
 
   const emit = defineEmits<InputEmits>()
   // 处理输入事件
   const handleInput = () => {
     emit('update:modelValue', modelValue.value)
+    emit('change', modelValue.value)
+    emit('input', modelValue.value)
+  }
+  // 处理change事件
+  const handleChange = () => {
+    emit('change', modelValue.value)
+    emit('input', modelValue.value)
   }
 
   // 外部更新modalValue，同步到本地modelValue
