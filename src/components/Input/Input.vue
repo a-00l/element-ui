@@ -18,7 +18,10 @@
         <slot name="prepend"></slot>
       </div>
 
-      <div class="el-input__wrapper">
+      <div
+        class="el-input__wrapper"
+        :class="{ 'is-focus': isFocus }"
+      >
         <!-- prefix -->
         <span
           v-if="prefixIcon"
