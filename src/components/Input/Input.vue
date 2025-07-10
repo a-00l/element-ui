@@ -34,6 +34,8 @@
           class="el-input__inner"
           :type="type"
           :disabled="disabled"
+          v-model="modelValue"
+          @input="handleInput"
         />
 
         <!-- suffix -->
@@ -57,21 +59,37 @@
       <textarea
         name=""
         id=""
+        v-model="modelValue"
+        @input="handleInput"
       ></textarea>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-  import type { InputProps } from './types'
-
+  import { ref, watch } from 'vue'
+  import type { InputEmits, InputProps } from './types'
   defineOptions({
     name: 'MyInput',
   })
 
-  withDefaults(defineProps<InputProps>(), {
+  const props = withDefaults(defineProps<InputProps>(), {
     type: 'text',
   })
+
+  // 输入框绑定
+  const modelValue = ref(props.modelValue)
+  const emit = defineEmits<InputEmits>()
+  // 处理输入事件
+  const handleInput = () => {
+    emit('update:modelValue', modelValue.value)
+  }
+
+  // 外部更新modalValue，同步到本地modelValue
+  watch(
+    () => props.modelValue,
+    (newValue) => (modelValue.value = newValue),
+  )
 </script>
 
 <style scoped></style>

@@ -70,10 +70,15 @@
     duration: 0,
     showClose: true,
   })
+
+  const input = ref()
 </script>
 
 <template>
-  <Input prefix-icon="前缀">
+  <Input
+    prefix-icon="前缀"
+    v-model="input"
+  >
     <template #prepend>
       <Icon icon="user" />
     </template>
