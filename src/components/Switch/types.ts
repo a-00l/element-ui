@@ -11,6 +11,7 @@ export interface SwitchPrors {
   inactiveText?: string;
   size?: 'large' | 'default' | 'small'
   width?: number | string;
+  inlinePrompt?: boolean;
 }
 
 export interface SwitchEmits {

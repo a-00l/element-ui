@@ -18,13 +18,28 @@
     />
 
     <span
+      v-if="!inlinePrompt"
+      class="my-switch__label my-switch__label--left"
+      :class="{ 'is-active': !isSwitch }"
+      >{{ activeText }}
+    </span>
+    <span
       class="my-switch__core"
       :style="{ width: `${width}px` }"
     >
-      <div class="my-switch__inner">
+      <div
+        v-if="inlinePrompt"
+        class="my-switch__inner"
+      >
         <span class="my-switch__inner-text">{{ checked ? activeText : inactiveText }}</span>
       </div>
       <div class="my-switch__action"></div>
+    </span>
+    <span
+      v-if="!inlinePrompt"
+      class="my-switch__label my-switch__label--right"
+      :class="{ 'is-active': isSwitch }"
+      >{{ inactiveText }}
     </span>
   </div>
 </template>
@@ -39,6 +54,7 @@
   const props = withDefaults(defineProps<SwitchPrors>(), {
     activeValue: true,
     inactiveValue: false,
+    inlinePrompt: false,
   })
 
   const emit = defineEmits<SwitchEmits>()

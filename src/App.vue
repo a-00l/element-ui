@@ -81,9 +81,10 @@
 <template>
   <Switch
     v-model="swit"
-    active-text="激活"
-    inactive-text="未激活"
-    width="10"
+    active-text="Open"
+    inactive-text="Close"
+    width="100"
+    inline-prompt
   ></Switch>
   <Input
     v-model="inputValue"

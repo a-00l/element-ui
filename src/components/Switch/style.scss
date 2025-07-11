@@ -12,6 +12,30 @@
   height: 32px;
   vertical-align: middle;
 
+  .my-switch__label--left {
+    margin-right: 10px;
+  }
+
+  .my-switch__label--right {
+    margin-left: 10px;
+  }
+
+  .my-switch__label {
+    transition: var(--my-transition-duration-fast);
+    height: 20px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    vertical-align: middle;
+    color: var(--my-text-color-primary);
+    user-select: none;
+  }
+
+  .is-active {
+    color: var(--my-color-primary);
+  }
+
   .my-switch__input {
     position: absolute;
     width: 0;
