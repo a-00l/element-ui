@@ -14,6 +14,7 @@
   import { createMessage } from './components/Message/method'
   import Message from './components/Message/Message.vue'
   import Input from './components/Input/Input.vue'
+  import Switch from './components/Switch/Switch.vue'
   const option = ref<Partial<Options>>({ placement: 'bottom' })
   const btn = ref<ButtonInstance>()
 
@@ -74,19 +75,16 @@
   const input = ref()
   const input1 = ref()
   const inputValue = ref()
-  // const inputRef = ref()
-  // console.log(inputRef)
-  // setTimeout(() => {
-  //   inputRef.value?.focus()
-  // }, 2000)
-
-  // setTimeout(() => {
-  //   inputRef.value?.blur()
-  //   inputRef.value?.clear()
-  // }, 3000)
+  const swit = ref(false)
 </script>
 
 <template>
+  <Switch
+    v-model="swit"
+    active-text="激活"
+    inactive-text="未激活"
+    width="10"
+  ></Switch>
   <Input
     v-model="inputValue"
     clearable
