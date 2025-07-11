@@ -14,6 +14,18 @@
 
   &.is-disabled {
     cursor: not-allowed;
+
+    .my-input__wrapper {
+      background-color: var(--my-disabled-bg-color);
+      box-shadow: 0 0 0 1px var(--my-disabled-border-color) inset;
+      cursor: not-allowed;
+    }
+
+    .my-input__inner {
+      color: var(--my-disabled-text-color);
+      -webkit-text-fill-color: var(--my-disabled-text-color);
+      cursor: not-allowed;
+    }
   }
 }
 

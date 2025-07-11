@@ -91,11 +91,11 @@
     v-model="inputValue"
     clearable
     show-password
+    disabled
   >
     <template #prefix>
       <Icon icon="user"></Icon>
     </template>
-
     <template #suffix>
       <Icon icon="user"></Icon>
     </template>
