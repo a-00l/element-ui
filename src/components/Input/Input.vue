@@ -62,7 +62,7 @@
             <Icon
               icon="times-circle"
               class="my-input__icon my-input__clear"
-              @mousedown="clear"
+              @mousedown.prevent="clear"
               v-if="isClearable"
             >
             </Icon>
@@ -118,7 +118,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue'
+  import { computed, nextTick, ref, watch } from 'vue'
   import Icon from '../Icon/Icon.vue'
   import type { InputEmits, InputProps } from './types'
   defineOptions({
@@ -136,13 +136,9 @@
   // 控制清空功能
   const isFocus = ref(false)
   // 判断是否可以清空
-  const isClearable = computed(() => {
-    const result = !!modelValue.value && props.clearable && isFocus.value && !props.disabled
-    console.log('isClearable:', result)
-    console.log('isPwdShow:', isPwdShow.value)
-
-    return result
-  })
+  const isClearable = computed(
+    () => !!modelValue.value && props.clearable && isFocus.value && !props.disabled,
+  )
 
   // 控制密码是否可见
   const isPassword = ref(false)
@@ -183,8 +179,10 @@
 
   // 切换密码是否可见
   const togglePwdVisible = () => {
-    inputRef.value?.focus()
     isPassword.value = !isPassword.value
+    nextTick(() => {
+      inputRef.value?.focus()
+    })
   }
 
   // 清空input
