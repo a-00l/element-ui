@@ -1,0 +1,147 @@
+.my-input {
+  --my-input-inner-height: calc(var(--my-input-height, 32px) - 2px);
+}
+
+.my-input {
+  --my-input-height: var(--my-component-size);
+  position: rmyative;
+  font-size: var(--my-font-size-base);
+  display: inline-flex;
+  width: var(--my-input-width);
+  line-height: var(--my-input-height);
+  box-sizing: border-box;
+  vertical-align: middle;
+
+  &.is-disabled {
+    cursor: not-allowed;
+  }
+}
+
+.my-input__wrapper {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 11px;
+  background-color: var(--my-input-bg-color, var(--my-fill-color-blank));
+  background-image: none;
+  border-radius: var(--my-input-border-radius, var(--my-border-radius-base));
+  cursor: text;
+  transition: var(--my-transition-box-shadow);
+  transform: translateZ(0);
+  box-shadow: 0 0 0 1px var(--my-input-border-color, var(--my-border-color)) inset;
+
+  .my-input__inner {
+    width: 100%;
+    flex-grow: 1;
+    -webkit-appearance: none;
+    color: var(--my-input-text-color, var(--my-text-color-regular));
+    font-size: inherit;
+    height: var(--my-input-inner-height);
+    line-height: var(--my-input-inner-height);
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    box-sizing: border-box;
+
+    &.my-input__inner::-ms-reveal {
+      display: none;
+    }
+  }
+
+  .my-input__suffix {
+    display: inline-flex;
+    white-space: nowrap;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    height: 100%;
+    line-height: var(--my-input-inner-height);
+    text-align: center;
+    color: var(--my-input-icon-color, var(--my-text-color-placeholder));
+    transition: all var(--my-transition-duration);
+    pointer-events: none;
+
+    .my-input__suffix-inner > :first-child {
+      margin-left: 8px;
+    }
+
+    .my-input__suffix-inner {
+      pointer-events: all;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .my-input__prefix {
+    color: var(--my-input-icon-color, var(--my-text-color-placeholder));
+    display: inline-flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    height: 100%;
+    line-height: var(--my-input-inner-height);
+    pointer-events: none;
+    text-align: center;
+    transition: all var(--my-transition-duration);
+    white-space: nowrap;
+
+    .my-input__prefix-inner > :last-child {
+      margin-right: 8px;
+    }
+
+    .my-input__prefix-inner {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+      pointer-events: all;
+    }
+  }
+
+  .my-input__icon {
+    align-items: center;
+    display: flex;
+    height: inherit;
+    justify-content: center;
+    line-height: inherit;
+    margin-left: 8px;
+    transition: all var(--my-transition-duration);
+  }
+
+  .my-input__password {
+    color: var(--my-input-icon-color);
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .my-input__clear {
+    color: var(--my-input-icon-color);
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 1px var(--my-input-hover-border-color) inset;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 1px var(--my-input-focus-border-color) inset;
+  }
+}
+
+.my-input {
+  --my-input-text-color: var(--my-text-color-regular);
+  --my-input-border: var(--my-border);
+  --my-input-hover-border: var(--my-border-color-hover);
+  --my-input-focus-border: var(--my-color-primary);
+  --my-input-transparent-border: 0 0 0 1px transparent inset;
+  --my-input-border-color: var(--my-border-color);
+  --my-input-border-radius: var(--my-border-radius-base);
+  --my-input-bg-color: var(--my-fill-color-blank);
+  --my-input-icon-color: var(--my-text-color-placeholder);
+  --my-input-placeholder-color: var(--my-text-color-placeholder);
+  --my-input-hover-border-color: var(--my-border-color-hover);
+  --my-input-clear-hover-color: var(--my-text-color-secondary);
+  --my-input-focus-border-color: var(--my-color-primary);
+  --my-input-width: 100%;
+}

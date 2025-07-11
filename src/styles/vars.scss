@@ -70,6 +70,10 @@
 
   --my-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
   --my-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --my-transition-box-shadow: box-shadow var(--my-transition-duration-fast)
+    var(--my-transition-function-ease-in-out-bezier);
+  --my-transition-duration-fast: 0.2s;
+  --my-transition-function-ease-in-out-bezier: cubic-bezier(0.645, 0.045, 0.355, 1);
 
   --my-dropdown-menu-box-shadow: var(--my-box-shadow-light);
   --my-dropdown-menuItem-hover-fill: var(--my-color-primary-light-9);
@@ -117,4 +121,8 @@
   --my-disabled-bg-color: var(--my-fill-color-light);
   --my-disabled-text-color: var(--my-text-color-placeholder);
   --my-disabled-border-color: var(--my-border-color-light);
+
+  --my-component-size-large: 40px;
+  --my-component-size: 32px;
+  --my-component-size-small: 24px;
 }

@@ -13,30 +13,36 @@
       <!-- prepend slot -->
       <div
         v-if="$slots.prepend"
-        class="el-input-group__prepend"
+        class="my-input-group__prepend"
       >
         <slot name="prepend"></slot>
       </div>
 
       <div
-        class="el-input__wrapper"
+        class="my-input__wrapper"
         :class="{ 'is-focus': isFocus }"
       >
         <!-- prefix -->
         <span
-          v-if="prefixIcon"
-          class="el-input__prefix"
-          :key="1"
-          :class="{ abas: true }"
+          v-if="$slots.prefix || prefixIcon"
+          class="my-input__prefix"
         >
-          <slot name="prefix">{{ prefixIcon }}</slot>
+          <span class="my-input__prefix-inner">
+            <Icon
+              v-if="prefixIcon"
+              :icon="prefixIcon!"
+              class="my-input__icon"
+            ></Icon>
+
+            <slot name="prefix"></slot>
+          </span>
         </span>
 
         <!-- input -->
         <input
           ref="inputRef"
           v-bind="$attrs"
-          class="el-input__inner"
+          class="my-input__inner"
           :type="inputType"
           :disabled="disabled"
           v-model="modelValue"
@@ -49,37 +55,48 @@
 
         <!-- suffix -->
         <span
-          v-if="$slots.suffix || isClearable || isPwdShow"
-          class="el-input__suffix"
+          v-if="$slots.suffix || isClearable || isPwdShow || suffixIcon"
+          class="my-input__suffix"
         >
-          <Icon
-            icon="times-circle"
-            @mousedown="clear"
-            v-if="isClearable"
-          >
-          </Icon>
+          <span class="my-input__suffix-inner">
+            <Icon
+              icon="times-circle"
+              class="my-input__icon my-input__clear"
+              @mousedown="clear"
+              v-if="isClearable"
+            >
+            </Icon>
 
-          <Icon
-            icon="eye"
-            v-if="isPwdShow && isPassword"
-            @click="togglePwdVisible"
-          >
-          </Icon>
+            <Icon
+              icon="eye"
+              class="my-input__icon my-input__password"
+              v-if="isPwdShow && isPassword"
+              @click="togglePwdVisible"
+            >
+            </Icon>
 
-          <Icon
-            icon="eye-slash"
-            v-if="isPwdShow && !isPassword"
-            @click="togglePwdVisible"
-          >
-          </Icon>
-          <slot name="suffix"></slot>
+            <Icon
+              icon="eye-slash"
+              class="my-input__icon my-input__password"
+              v-if="isPwdShow && !isPassword"
+              @click="togglePwdVisible"
+            >
+            </Icon>
+
+            <Icon
+              v-if="suffixIcon"
+              :icon="suffixIcon!"
+              class="my-input__icon"
+            ></Icon>
+            <slot name="suffix"></slot>
+          </span>
         </span>
       </div>
 
       <!-- append slot -->
       <div
         v-if="$slots.append"
-        class="el-input-group__append"
+        class="my-input-group__append"
       >
         <slot name="append"></slot>
       </div>
@@ -141,11 +158,6 @@
     return props.type
   })
 
-  // 切换密码是否可见
-  const togglePwdVisible = () => {
-    isPassword.value = !isPassword.value
-  }
-
   // focus
   const handleFocus = (even: FocusEvent) => {
     // 避免重复调用
@@ -167,6 +179,12 @@
     emit('change', modelValue.value)
     isFocus.value = false
     inputRef.value?.blur()
+  }
+
+  // 切换密码是否可见
+  const togglePwdVisible = () => {
+    inputRef.value?.focus()
+    isPassword.value = !isPassword.value
   }
 
   // 清空input

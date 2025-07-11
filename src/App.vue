@@ -90,7 +90,16 @@
   <Input
     v-model="inputValue"
     clearable
-  ></Input>
+    show-password
+  >
+    <template #prefix>
+      <Icon icon="user"></Icon>
+    </template>
+
+    <template #suffix>
+      <Icon icon="user"></Icon>
+    </template>
+  </Input>
 
   <Input
     v-model="inputValue"

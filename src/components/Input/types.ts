@@ -1,11 +1,13 @@
+import type { Component } from "vue";
+
 export interface InputProps {
   modelValue: string | number;
   type?: string;
   size?: 'small' | 'large' | 'default';
   showPassword?: boolean;
   disabled?: boolean;
-  prefixIcon?: string;
-  suffixIcon?: string;
+  prefixIcon?: string | Component;
+  suffixIcon?: string | Component;
   clearable?: boolean;
 }
 
