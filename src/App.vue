@@ -72,13 +72,54 @@
     showClose: true,
   })
 
-  const input = ref()
-  const input1 = ref()
   const inputValue = ref()
   const swit = ref(false)
+  const sel = ref()
+  import Select from './components/Select/Select.vue'
+  import Option from './components/Select/Option.vue'
+
+  const popperOption: any = {
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 20],
+        },
+      },
+      {
+        name: 'sameWidth',
+        enabled: true,
+        fn: ({ state }: { state: any }) => {
+          state.styles.popper.width = `${state.rects.reference.width}px`
+        },
+        phase: 'beforeWrite',
+        requires: ['computeStyles'],
+      },
+    ],
+  }
 </script>
 
 <template>
+  <Tooltip
+    :popper-option="popperOption"
+    placement="bottom"
+  >
+    <div>1212121212121212121212121212121212121212121212121212</div>
+    <template #content>
+      <h1>1</h1>
+      <h1>1</h1>
+      <h1>1</h1>
+      <h1>1</h1>
+    </template>
+  </Tooltip>
+  <Select v-model="sel">
+    <Option label="2"></Option>
+    <Option label="2"></Option>
+    <Option
+      value="123123"
+      label="3"
+    ></Option>
+  </Select>
   <Switch
     v-model="swit"
     active-text="Open"
@@ -131,7 +172,7 @@
     content="tooltip"
     ref="popper"
     placement="right"
-    trigger="click"
+    trigger="hover"
   >
     <Button type="danger">123</Button>
     <template #content>
