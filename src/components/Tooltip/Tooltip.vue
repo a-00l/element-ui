@@ -132,7 +132,6 @@
   })
 
   const togglePopper = () => {
-    debugger
     isOpen.value = !isOpen.value
     emit('visible-change', isOpen.value)
   }
