@@ -159,7 +159,6 @@
     // 避免重复调用
     if (isFocus.value) return
 
-    debugger
     isFocus.value = true
     inputRef.value?.focus()
     emit('focus', even)
@@ -187,7 +186,6 @@
 
   // 清空input
   const clear = () => {
-    debugger
     modelValue.value = ''
     emit('update:modelValue', '')
     emit('input', '')

@@ -80,6 +80,7 @@
     emit('visible-change', isOpen.value)
   }
 
+  // 添加防抖
   const opendebounce = debounce(open, props.openDelay)
   const closedebounce = debounce(close, props.closeDelay)
   const openFinal = () => {
@@ -92,10 +93,9 @@
     closedebounce()
   }
 
+  // 点击popper之外，关闭
   useClickOutside(parentNode, () => {
     if (props.trigger === 'click' && !props.manual && isOpen.value) {
-      debugger
-      console.log(123123)
       close()
     }
   })
