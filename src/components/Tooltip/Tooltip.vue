@@ -13,7 +13,7 @@
     </div>
     <Transition :name="props.transition">
       <div
-        v-if="isOpen"
+        v-show="isOpen"
         @mouseenter="openFinal"
         class="my-tooltip__popper"
         :class="{
