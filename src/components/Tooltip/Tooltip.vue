@@ -14,7 +14,9 @@
     <Transition :name="props.transition">
       <div
         v-show="isOpen"
-        @mouseenter="openFinal"
+        v-on="{
+          ...(manual ? {} : { mouseenter: openFinal }),
+        }"
         class="my-tooltip__popper"
         :class="{
           'is-dark': effect === 'dark',
@@ -109,7 +111,6 @@
       popperInstance?.destroy()
       popperInstance = createPopper(triggerRef.value, popperRef.value, {
         placement: props.placement,
-        ...props.popperOption,
         modifiers: [
           {
             name: 'offset',
@@ -118,6 +119,7 @@
             },
           },
         ],
+        ...props.popperOption,
       })
     }
   }
