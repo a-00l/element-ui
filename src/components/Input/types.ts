@@ -19,3 +19,7 @@ export interface InputEmits {
   (e: 'input', value: string | number): void;
   (e: 'clear'): void;
 }
+
+export interface InputInstance {
+  ref: HTMLInputElement | HTMLTextAreaElement
+}
