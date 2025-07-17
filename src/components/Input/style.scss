@@ -38,7 +38,7 @@
   background-color: var(--my-input-bg-color, var(--my-fill-color-blank));
   background-image: none;
   border-radius: var(--my-input-border-radius, var(--my-border-radius-base));
-  cursor: text;
+  cursor: pointer;
   transition: var(--my-transition-box-shadow);
   transform: translateZ(0);
   box-shadow: 0 0 0 1px var(--my-input-border-color, var(--my-border-color)) inset;
