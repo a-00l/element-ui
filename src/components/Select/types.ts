@@ -7,6 +7,8 @@ export interface SelectProps {
   placeholder?: string;
   disabled?: boolean;
   clearable?: boolean;
+  filterable?: boolean;
+  filterMethod?: (value: string) => SelectOptionProps[];
 }
 
 export interface SelectOptionProps {
@@ -15,13 +17,13 @@ export interface SelectOptionProps {
   disabled?: boolean;
 }
 
-export interface stateSelect {
-  inputValue: string;
+export interface StateSelect {
+  inputValue: string | number;
   selectOption: SelectOptionProps
 }
 
 export interface SelectEmits {
-  (e: 'change', value: string): void;
-  (e: 'update:modelValue', value: string): void;
+  (e: 'change', value: any): void;
+  (e: 'update:modelValue', value: string | number): void;
   (e: 'visible-change', value: boolean): void
 }

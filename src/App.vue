@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { onMounted, ref, useSlots } from 'vue'
+  import { onMounted, ref, useSlots, watch } from 'vue'
   import Button from './components/Button/Button.vue'
   import type { ButtonInstance } from './components/Button/types'
   import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
@@ -37,40 +37,40 @@
     })
   }
 
-  createMessage({
-    message: 'hello world',
-    type: 'info',
-    duration: 0,
-    showClose: true,
-  })
+  // createMessage({
+  //   message: 'hello world',
+  //   type: 'info',
+  //   duration: 0,
+  //   showClose: true,
+  // })
 
-  createMessage({
-    message: 'hello world',
-    type: 'success',
-    duration: 0,
-    showClose: true,
-  })
+  // createMessage({
+  //   message: 'hello world',
+  //   type: 'success',
+  //   duration: 0,
+  //   showClose: true,
+  // })
 
-  createMessage({
-    message: 'hello world',
-    type: 'warning',
-    duration: 0,
-    showClose: true,
-  })
+  // createMessage({
+  //   message: 'hello world',
+  //   type: 'warning',
+  //   duration: 0,
+  //   showClose: true,
+  // })
 
-  createMessage({
-    message: 'hello world',
-    type: 'error',
-    duration: 0,
-    showClose: true,
-  })
+  // createMessage({
+  //   message: 'hello world',
+  //   type: 'error',
+  //   duration: 0,
+  //   showClose: true,
+  // })
 
-  createMessage({
-    message: 'hello world',
-    type: 'primary',
-    duration: 0,
-    showClose: true,
-  })
+  // createMessage({
+  //   message: 'hello world',
+  //   type: 'primary',
+  //   duration: 0,
+  //   showClose: true,
+  // })
 
   const inputValue = ref()
   const swit = ref(false)
@@ -97,6 +97,10 @@
       },
     ],
   }
+
+  watch(sel, (newVal) => {
+    console.log('select value changed:', newVal)
+  })
 </script>
 
 <template>
@@ -112,12 +116,22 @@
       <h1>1</h1>
     </template>
   </Tooltip>
-  <Select v-model="sel">
-    <Option label="2"></Option>
-    <Option label="2"></Option>
+  <Select
+    v-model="sel"
+    clearable
+    filterable
+  >
     <Option
-      value="123123"
-      label="3"
+      label="2"
+      value="1"
+    ></Option>
+    <Option
+      label="2"
+      value="2"
+    ></Option>
+    <Option
+      label="123"
+      value="3"
     ></Option>
   </Select>
   <Switch
@@ -159,7 +173,7 @@
     placement="right"
     trigger="click"
   >
-    <span>click</span>
+    <span>clic</span>
     <template #dropdown>
       <DropdownMenu>
         <DropdownItem> 123 </DropdownItem>

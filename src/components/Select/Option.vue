@@ -3,34 +3,39 @@
     class="my-select__menu-item"
     :class="{
       'is-disabled': disabled,
-      'is-selected': inputValue === optionValue,
+      'is-selected': selectd === props.value,
     }"
-    :id="`select-item-${optionValue}`"
-    @click="optionClick(optionValue)"
+    :id="`select-item-${props.value}`"
+    @click="optionClick(props.value)"
   >
     {{ label }}
   </li>
 </template>
 
 <script setup lang="ts">
-  import { inject, onMounted, ref, type Ref } from 'vue'
+  import { inject, onMounted, type Ref } from 'vue'
   import type { SelectOptionProps, valueType } from './types'
-  import { optionPush } from './method'
+  import { optionFind, optionPush, selectd, selectdValue, stateSelect } from './method'
   import type { InputInstance } from '../Input/types'
   const props = withDefaults(defineProps<SelectOptionProps>(), {
     disabled: false,
   })
 
-  const optionValue = ref(props.value)
   // 将父组件的inputValue注入
-  const inputValue = inject('inputValue') as Ref
   const inputRef = inject('inputRef') as Ref<InputInstance>
   const optionClick = (value: valueType) => {
     if (props.disabled) return
 
+    selectd.value = selectdValue(value)
+
+    // 将选中的值赋给inputValue
+    stateSelect.inputValue = optionFind(value)?.label as string
+    console.log(stateSelect)
+
+    // 记录选中的值
+    stateSelect.selectOption = optionFind(value)!
     // 选中input
     inputRef.value.ref.focus()
-    inputValue.value = value
   }
 
   // 将所有option保存至一个数组
