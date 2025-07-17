@@ -6,6 +6,8 @@
     }"
     @click="toggleSelect"
     ref="selectRef"
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
   >
     <Tooltip
       manual
@@ -22,10 +24,20 @@
       >
         <template #suffix>
           <Icon
+            v-if="showClearIcon"
+            icon="times-circle"
+            class="my-input__icon my-input__clear"
+            @click.stop="clear"
+          >
+          </Icon>
+
+          <Icon
+            v-else
             icon="angle-down"
             class="header-angle"
             :class="{ 'is-active': isControlSelect }"
-          ></Icon>
+          >
+          </Icon>
         </template>
       </Input>
       <template #content>
@@ -42,7 +54,7 @@
   import Tooltip from '../Tooltip/Tooltip.vue'
   import Input from '../Input/Input.vue'
   import type { SelectEmits, SelectProps } from './types'
-  import { provide, ref } from 'vue'
+  import { computed, provide, ref } from 'vue'
   import type { TooltipInstance } from '../Tooltip/types'
   import { useClickOutside } from '@/hooks/useClickOutside'
   import type { InputInstance } from '../Input/types'
@@ -84,6 +96,18 @@
   const inputRef = ref<InputInstance>()
   const tooltipRef = ref<TooltipInstance>()
   const isControlSelect = ref(false)
+  // 控制清空图标
+  const isHover = ref(false)
+  const showClearIcon = computed(() => {
+    return props.clearable && inputValue.value && isHover.value && !props.disabled
+  })
+
+  // 清空select值
+  const clear = () => {
+    inputValue.value = ''
+  }
+
+  const NOOP = () => {}
   // 控制下拉列表是否显示
   const controlSelect = (show: boolean) => {
     if (show) {

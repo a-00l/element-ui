@@ -6,6 +6,7 @@ export interface SelectProps {
   // 一些基本表单属性
   placeholder?: string;
   disabled?: boolean;
+  clearable?: boolean;
 }
 
 export interface SelectOptionProps {
