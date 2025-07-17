@@ -11,13 +11,21 @@
   display: inline-block;
   vertical-align: middle;
   line-height: 32px;
-
-  .my-tooltip .my-tooltip__popper {
-    padding: 0;
-  }
+  cursor: pointer;
 
   .my-input__inner {
     cursor: pointer;
+  }
+
+  .my-tooltip__popper {
+    padding: 0;
+  }
+  .header-angle {
+    transition: transform 0.3s ease;
+
+    &.is-active {
+      transform: rotate(180deg);
+    }
   }
 
   .my-select__menu {

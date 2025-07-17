@@ -9,7 +9,7 @@ export interface SelectProps {
 }
 
 export interface SelectOptionProps {
-  value?: valueType;
+  value: valueType;
   label: string | number;
   disabled?: boolean;
 }

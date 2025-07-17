@@ -16,17 +16,20 @@
   import { inject, onMounted, ref, type Ref } from 'vue'
   import type { SelectOptionProps, valueType } from './types'
   import { optionPush } from './method'
+  import type { InputInstance } from '../Input/types'
   const props = withDefaults(defineProps<SelectOptionProps>(), {
     disabled: false,
   })
 
-  // value为空时，使用label
-  const optionValue = ref(props.value ? props.value : props.label)
+  const optionValue = ref(props.value)
   // 将父组件的inputValue注入
   const inputValue = inject('inputValue') as Ref
+  const inputRef = inject('inputRef') as Ref<InputInstance>
   const optionClick = (value: valueType) => {
     if (props.disabled) return
 
+    // 选中input
+    inputRef.value.ref.focus()
     inputValue.value = value
   }
 

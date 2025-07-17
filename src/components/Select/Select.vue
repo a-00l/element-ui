@@ -17,8 +17,16 @@
         v-model="inputValue"
         :disabled="disabled"
         :placeholder="placeholder"
+        ref="inputRef"
         readonly
       >
+        <template #suffix>
+          <Icon
+            icon="angle-down"
+            class="header-angle"
+            :class="{ 'is-active': isControlSelect }"
+          ></Icon>
+        </template>
       </Input>
       <template #content>
         <ul class="my-select__menu">
@@ -30,13 +38,14 @@
 </template>
 
 <script setup lang="ts">
+  import Icon from '../Icon/Icon.vue'
   import Tooltip from '../Tooltip/Tooltip.vue'
   import Input from '../Input/Input.vue'
   import type { SelectEmits, SelectProps } from './types'
   import { provide, ref } from 'vue'
   import type { TooltipInstance } from '../Tooltip/types'
-  import { optionArray } from './method'
   import { useClickOutside } from '@/hooks/useClickOutside'
+  import type { InputInstance } from '../Input/types'
   defineOptions({
     name: 'mySelect',
   })
@@ -72,6 +81,7 @@
 
   const inputValue = ref()
 
+  const inputRef = ref<InputInstance>()
   const tooltipRef = ref<TooltipInstance>()
   const isControlSelect = ref(false)
   // 控制下拉列表是否显示
@@ -107,6 +117,7 @@
   })
   // 传递给子组件
   provide('inputValue', inputValue)
+  provide('inputRef', inputRef)
 </script>
 
 <style scoped></style>
