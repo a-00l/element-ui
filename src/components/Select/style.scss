@@ -58,6 +58,10 @@
       background-color: var(--my-select-item-hover-bg-color);
     }
 
+    &.is-highlight {
+      background-color: var(--my-select-item-hover-bg-color);
+    }
+
     &.is-disabled {
       color: var(--my-select-item-disabled-font-color);
       cursor: not-allowed;

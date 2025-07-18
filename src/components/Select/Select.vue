@@ -22,6 +22,7 @@
         ref="inputRef"
         :readonly="!filterable"
         @input="search(stateSelect.inputValue as string)"
+        @keydown="handleKeydown"
       >
         <template #prefix>
           <Loading :loading="loading"></Loading>
@@ -49,7 +50,7 @@
           v-show="!isFilterable"
           class="my-select__menu"
         >
-          <NoData v-if="optionArray.length === 0"></NoData>
+          <NoData v-if="optionsFilter.length === 0"></NoData>
           <slot></slot>
         </ul>
         <!-- 查询显示 -->
@@ -59,10 +60,12 @@
         >
           <NoData v-if="optionsFilter.length === 0"></NoData>
           <Option
-            v-else
             v-for="item in optionsFilter"
             :label="item.label"
             :value="item.value"
+            :class="{
+              'is-highlight': stateSelect.highlightIndex === optionsFilter.indexOf(item),
+            }"
           >
           </Option>
         </ul>
@@ -77,7 +80,7 @@
   import Tooltip from '../Tooltip/Tooltip.vue'
   import Input from '../Input/Input.vue'
   import type { SelectEmits, SelectProps } from './types'
-  import { computed, provide, ref, watch } from 'vue'
+  import { computed, nextTick, provide, ref, watch } from 'vue'
   import type { TooltipInstance } from '../Tooltip/types'
   import { useClickOutside } from '@/hooks/useClickOutside'
   import type { InputInstance } from '../Input/types'
@@ -170,18 +173,76 @@
       value: '',
       label: '',
     }
+
+    search('')
   }
 
+  // 处理input键盘事件
+  const handleKeydown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case 'Enter':
+        if (!isControlSelect.value) {
+          controlSelect(true)
+        } else {
+          // 没有选中任意一项
+          if (stateSelect.highlightIndex === -1) return
+
+          // 将选中的值回显到 input 中
+          stateSelect.inputValue = optionsFilter.value[stateSelect.highlightIndex!].label
+          // 将选中的值记录到 selectOption 中
+          stateSelect.selectOption = optionsFilter.value[stateSelect.highlightIndex!]
+
+          toggleSelect()
+        }
+        break
+      case 'Escape':
+        controlSelect(false)
+      case 'ArrowUp':
+        if (!isControlSelect.value) return
+
+        // 选中最后一项
+        if (stateSelect.highlightIndex === -1 || stateSelect.highlightIndex! <= 0) {
+          stateSelect.highlightIndex = optionsFilter.value.length - 1
+        } else {
+          stateSelect.highlightIndex!--
+        }
+        break
+      case 'ArrowDown':
+        if (!isControlSelect.value) return
+
+        // 选中第一项
+        if (
+          stateSelect.highlightIndex === -1 ||
+          stateSelect.highlightIndex! >= optionsFilter.value.length - 1
+        ) {
+          stateSelect.highlightIndex = 0
+        } else {
+          stateSelect.highlightIndex!++
+        }
+        break
+      default:
+        break
+    }
+  }
   // 控制下拉列表是否显示
   const controlSelect = (show: boolean) => {
     if (show) {
       // 再次打开，清空 inputValue
       stateSelect.inputValue = ''
+      search('')
+
       tooltipRef.value?.show()
     } else {
       // 关闭时，回显之前选中的值
       stateSelect.inputValue = stateSelect.selectOption.label
       tooltipRef.value?.hide()
+      nextTick(() => {
+        // 将光标移动到输入框起始位置
+        if (inputRef.value?.ref instanceof HTMLInputElement) {
+          inputRef.value.ref.setSelectionRange(0, 0)
+          isFilterable.value = true
+        }
+      })
     }
 
     // 切换状态
@@ -204,6 +265,10 @@
   watch(
     () => stateSelect.inputValue,
     (newValue, oldValue) => {
+      if (!isControlSelect.value && stateSelect.inputValue && !stateSelect.selectOption.label) {
+        toggleSelect()
+      }
+
       emit('update:modelValue', newValue)
       if (newValue !== oldValue) {
         emit('change', newValue)

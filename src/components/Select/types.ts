@@ -25,7 +25,8 @@ export interface SelectOptionProps {
 // 记录下拉菜单的状态
 export interface StateSelect {
   inputValue: string | number;
-  selectOption: SelectOptionProps
+  selectOption: SelectOptionProps;
+  highlightIndex?: number;
 }
 
 export interface SelectEmits {

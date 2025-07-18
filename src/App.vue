@@ -77,6 +77,7 @@
   const sel = ref()
   import Select from './components/Select/Select.vue'
   import Option from './components/Select/Option.vue'
+  import type { SelectOptionProps } from './components/Select/types'
 
   const popperOption: any = {
     modifiers: [
@@ -97,10 +98,95 @@
       },
     ],
   }
+  interface ListItem {
+    value: string
+    label: string
+  }
 
+  const list = ref<ListItem[]>([])
+  const options = ref<ListItem[]>([])
+  const loading = ref(false)
   watch(sel, (newVal) => {
     console.log('select value changed:', newVal)
   })
+  onMounted(() => {
+    list.value = states.map((item) => {
+      return { value: `value:${item}`, label: `label:${item}` }
+    })
+  })
+
+  const remoteMethod = (query: string) =>
+    new Promise<SelectOptionProps[]>((resolve) => {
+      if (query) {
+        loading.value = true
+        setTimeout(() => {
+          const filteredOptions = list.value.filter((item) => {
+            return item.label.toLowerCase().includes(query.toLowerCase())
+          })
+          // 使用 resolve 返回过滤后的结果
+          loading.value = false
+          resolve(filteredOptions)
+        }, 200)
+      } else {
+        console.log(query)
+
+        // 使用 resolve 返回空数组
+        resolve([])
+      }
+    })
+
+  const states = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+  ]
 </script>
 
 <template>
@@ -120,19 +206,27 @@
     v-model="sel"
     clearable
     filterable
+    remote
+    :remote-method="remoteMethod"
+    :loading="loading"
   >
     <Option
-      label="2"
-      value="1"
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
     ></Option>
-    <Option
-      label="2"
-      value="2"
-    ></Option>
-    <Option
-      label="123"
-      value="3"
-    ></Option>
+    <!-- <Option
+      v-for="item in [
+        { value: '1', label: '选项1' },
+        { value: '2', label: '选项2' },
+        { value: '3', label: '选项3' },
+      ]"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      :loading="false"
+    ></Option> -->
   </Select>
   <Switch
     v-model="swit"

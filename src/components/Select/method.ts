@@ -7,7 +7,8 @@ export const selectd = ref()
 // 当前选择的值
 export const stateSelect: StateSelect = reactive({
   inputValue: '',
-  selectOption: { value: '', label: '' }
+  selectOption: { value: '', label: '' },
+  highlightIndex: -1
 })
 
 // 选项数组添加
