@@ -9,14 +9,20 @@ export interface SelectProps {
   clearable?: boolean;
   filterable?: boolean;
   filterMethod?: (value: string) => SelectOptionProps[];
+  // 远程搜索
+  remote?: boolean;
+  remoteMethod?: (value: string) => Promise<SelectOptionProps[]>;
+  loading?: boolean;
 }
 
+// 下拉选项的类型
 export interface SelectOptionProps {
   value: valueType;
   label: string | number;
   disabled?: boolean;
 }
 
+// 记录下拉菜单的状态
 export interface StateSelect {
   inputValue: string | number;
   selectOption: SelectOptionProps

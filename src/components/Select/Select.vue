@@ -23,6 +23,9 @@
         :readonly="!filterable"
         @input="search(stateSelect.inputValue as string)"
       >
+        <template #prefix>
+          <Loading :loading="loading"></Loading>
+        </template>
         <template #suffix>
           <Icon
             v-if="showClearIcon"
@@ -46,6 +49,7 @@
           v-show="!isFilterable"
           class="my-select__menu"
         >
+          <NoData v-if="optionArray.length === 0"></NoData>
           <slot></slot>
         </ul>
         <!-- 查询显示 -->
@@ -53,7 +57,9 @@
           v-show="isFilterable"
           class="my-select__menu"
         >
+          <NoData v-if="optionsFilter.length === 0"></NoData>
           <Option
+            v-else
             v-for="item in optionsFilter"
             :label="item.label"
             :value="item.value"
@@ -76,6 +82,8 @@
   import { useClickOutside } from '@/hooks/useClickOutside'
   import type { InputInstance } from '../Input/types'
   import { optionArray, stateSelect } from './method'
+  import Loading from './component/loading.vue'
+  import NoData from './component/NoData.vue'
   defineOptions({
     name: 'mySelect',
   })
@@ -106,6 +114,7 @@
 
   const props = withDefaults(defineProps<SelectProps>(), {
     placeholder: 'Select',
+    loading: false,
   })
   const emit = defineEmits<SelectEmits>()
 
@@ -121,12 +130,12 @@
     return stateSelect.selectOption.label ? stateSelect.selectOption.label : props.placeholder
   })
 
-  const search = (value: string) => {
+  const search = async (value: string) => {
     if (!props.filterable) return
 
-    // 如果输入为空，不过滤
     if (value.trim() === '') {
-      isFilterable.value = false
+      optionsFilter.value = [...optionArray]
+
       return
     }
 
@@ -134,6 +143,13 @@
     // 有自定义过滤方法则调用自定义过滤方法
     if (typeof props.filterMethod === 'function') {
       optionsFilter.value = props.filterMethod(value)
+    } else if (props.remote && props.filterable && typeof props.remoteMethod === 'function') {
+      // 远程搜索
+      try {
+        optionsFilter.value = await props.remoteMethod(value)
+      } catch (error) {
+        console.error('Remote search failed:', error)
+      }
     } else {
       optionsFilter.value = optionArray.filter((item) => {
         return String(item.label).includes(value)
@@ -150,13 +166,17 @@
   // 清空select值
   const clear = () => {
     stateSelect.inputValue = ''
+    stateSelect.selectOption = {
+      value: '',
+      label: '',
+    }
   }
 
   // 控制下拉列表是否显示
   const controlSelect = (show: boolean) => {
     if (show) {
-      // 再次打开，清空 stateSelect.inputValue
-      clear()
+      // 再次打开，清空 inputValue
+      stateSelect.inputValue = ''
       tooltipRef.value?.show()
     } else {
       // 关闭时，回显之前选中的值
