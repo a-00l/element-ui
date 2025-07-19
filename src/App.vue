@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { onMounted, ref, useSlots, watch } from 'vue'
+  import { onMounted, reactive, ref, useSlots, watch } from 'vue'
   import Button from './components/Button/Button.vue'
   import type { ButtonInstance } from './components/Button/types'
   import MyCollapseItem from '@/components/Collapse/CollapseItem.vue'
@@ -187,9 +187,40 @@
     'Wisconsin',
     'Wyoming',
   ]
+
+  import Form from './components/Form/Form.vue'
+  import FormItem from './components/Form/FormItem.vue'
+
+  const model = reactive({
+    email: '',
+    password: '',
+  })
+
+  const rules = {
+    email: [{ type: 'string', required: true, trigger: 'blur' }],
+    password: [{ type: 'string', required: true, trigger: 'blur' }],
+  }
 </script>
 
 <template>
+  <Form
+    :model="model"
+    :rules="rules"
+  >
+    <FormItem label="my form">
+      <template #label="{ label }">
+        <Button>{{ label }}</Button>
+      </template>
+      <Input v-model="inputValue"></Input>
+    </FormItem>
+    <FormItem label="my switch">
+      <Switch v-model="swit"></Switch>
+    </FormItem>
+    <FormItem label="my Button">
+      <Button>submit</Button>
+      <Button>reset</Button>
+    </FormItem>
+  </Form>
   <Tooltip
     :popper-option="popperOption"
     placement="bottom"
