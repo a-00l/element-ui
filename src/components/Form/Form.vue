@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
   import { provide } from 'vue'
-  import { FormContextKey, type FormContext, type FormProps } from './types'
+  import { FormContextKey, type FormProps } from './types'
 
   const props = defineProps<FormProps>()
 

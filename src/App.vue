@@ -197,7 +197,7 @@
   })
 
   const rules = {
-    email: [{ type: 'string', required: true, trigger: 'blur' }],
+    email: [{ type: 'string', required: true, trigger: 'blur', min: 3, max: 5 }],
     password: [{ type: 'string', required: true, trigger: 'blur' }],
   }
 </script>
@@ -207,19 +207,26 @@
     :model="model"
     :rules="rules"
   >
-    <FormItem label="my form">
+    <FormItem
+      label="my form"
+      prop="email"
+    >
       <template #label="{ label }">
         <Button>{{ label }}</Button>
       </template>
-      <Input v-model="inputValue"></Input>
+      <Input v-model="model.email"></Input>
     </FormItem>
-    <FormItem label="my switch">
-      <Switch v-model="swit"></Switch>
+    <FormItem
+      label="my switch"
+      prop="password"
+    >
+      <Switch v-model="model.password"></Switch>
     </FormItem>
     <FormItem label="my Button">
       <Button>submit</Button>
       <Button>reset</Button>
     </FormItem>
+    {{ model }}
   </Form>
   <Tooltip
     :popper-option="popperOption"
