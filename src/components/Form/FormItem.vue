@@ -15,7 +15,7 @@
       </slot>
     </label>
     <div class="my-form-item__content">
-      <slot></slot>
+      <slot :validate="validate"></slot>
       <div
         class="my-form-item__error-msg"
         v-if="stateItem.state === 'error'"
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, inject, reactive } from 'vue'
+  import { computed, inject, provide, reactive } from 'vue'
   import {
     FormContextKey,
+    FormItemContextKey,
     type FormContext,
     type FormItemProps,
     type FormValidateFailure,
@@ -67,7 +68,6 @@
   })
 
   const validate = () => {
-    console.log(rulesContext.value, modelContext.value)
     if (!props.prop) return
     stateItem.loading = true
     // 添加字段校验规则
@@ -84,10 +84,8 @@
       .catch((e: FormValidateFailure) => {
         stateItem.state = 'error'
         stateItem.errMessage = e.errors && e.errors.length > 0 ? e.errors[0].message || '' : ''
-        console.log(e.errors)
       })
       .finally(() => {
-        console.log(stateItem)
         stateItem.loading = false
       })
   }
@@ -95,6 +93,10 @@
   const isUndefineOrNull = (value: any) => {
     return value === undefined || value === null
   }
+
+  provide(FormItemContextKey, {
+    validate,
+  })
 </script>
 
 <style lang="scss" scoped></style>

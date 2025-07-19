@@ -118,13 +118,22 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, nextTick, ref, watch } from 'vue'
+  import { computed, inject, nextTick, ref, watch } from 'vue'
   import Icon from '../Icon/Icon.vue'
   import type { InputEmits, InputProps } from './types'
+  import { FormItemContextKey } from '../Form/types'
   defineOptions({
     name: 'MyInput',
     inheritAttrs: false,
   })
+
+  const formItem = inject(FormItemContextKey)
+  // 触发表单验证
+  const runValidate = () => {
+    if (!formItem) return
+
+    formItem.validate()
+  }
 
   const inputRef = ref<HTMLInputElement>()
   const props = withDefaults(defineProps<InputProps>(), {
@@ -174,6 +183,9 @@
     emit('change', modelValue.value)
     isFocus.value = false
     inputRef.value?.blur()
+
+    // 表单验证
+    runValidate()
   }
 
   // 切换密码是否可见
