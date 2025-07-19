@@ -24,12 +24,11 @@
       </div>
     </div>
     {{ rulesContext }} -- {{ modelContext }}
-    <span @click="validate">校验</span>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { computed, inject, provide, reactive } from 'vue'
+  import { computed, inject, onMounted, onUnmounted, provide, reactive } from 'vue'
   import {
     FormContextKey,
     FormItemContextKey,
@@ -40,8 +39,19 @@
   import Schema from 'async-validator'
 
   const props = defineProps<FormItemProps>()
-  const { model, rules } = inject(FormContextKey) as FormContext
+  const { model, rules, addField, removeField } = inject(FormContextKey) as FormContext
 
+  onMounted(() => {
+    if (props.prop) {
+      addField({ prop: props.prop, validate })
+    }
+  })
+
+  onUnmounted(() => {
+    if (props.prop) {
+      removeField({ prop: props.prop, validate })
+    }
+  })
   // 记录状态
   const stateItem = reactive({
     state: '',
@@ -67,12 +77,26 @@
     }
   })
 
-  const validate = () => {
+  const getFormItemRules = (trigger?: string) => {
+    const rules = rulesContext.value
+    if (rules) {
+      return rules.filter((rule) => {
+        // 没有trigger，任何情况下都校验
+        if (!rule.trigger || !trigger) return true
+
+        // 对应trigger下校验
+        return rule.trigger && trigger === rule.trigger
+      })
+    } else {
+      return []
+    }
+  }
+  const validate = (trigger?: string) => {
     if (!props.prop) return
     stateItem.loading = true
     // 添加字段校验规则
     const validator = new Schema({
-      [props.prop]: rulesContext.value,
+      [props.prop]: getFormItemRules(trigger),
     })
 
     validator

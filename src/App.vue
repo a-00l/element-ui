@@ -190,6 +190,8 @@
 
   import Form from './components/Form/Form.vue'
   import FormItem from './components/Form/FormItem.vue'
+  import type { RuleItem } from 'async-validator'
+  import type { FormRules } from './components/Form/types'
 
   const model = reactive({
     email: '',
@@ -197,9 +199,12 @@
   })
 
   const rules = {
-    email: [{ type: 'string', required: true, trigger: 'blur', min: 3, max: 5 }],
+    email: [
+      { type: 'string', required: false, trigger: 'blur', min: 3, max: 5 },
+      { type: 'string', required: true },
+    ],
     password: [{ type: 'string', required: true, trigger: 'blur' }],
-  }
+  } as FormRules
 </script>
 
 <template>
@@ -220,7 +225,12 @@
       label="my switch"
       prop="password"
     >
-      <Switch v-model="model.password"></Switch>
+      <template #default="{ validate }">
+        <input
+          type="text"
+          @blur="validate()"
+        />
+      </template>
     </FormItem>
     <FormItem label="my Button">
       <Button>submit</Button>

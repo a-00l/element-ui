@@ -129,10 +129,8 @@
 
   const formItem = inject(FormItemContextKey)
   // 触发表单验证
-  const runValidate = () => {
-    if (!formItem) return
-
-    formItem.validate()
+  const runValidate = (trigger?: string) => {
+    formItem?.validate(trigger)
   }
 
   const inputRef = ref<HTMLInputElement>()
@@ -184,8 +182,7 @@
     isFocus.value = false
     inputRef.value?.blur()
 
-    // 表单验证
-    runValidate()
+    runValidate('blur')
   }
 
   // 切换密码是否可见
@@ -211,11 +208,15 @@
     emit('update:modelValue', modelValue.value)
     emit('change', modelValue.value)
     emit('input', modelValue.value)
+
+    runValidate('input')
   }
   // 处理change事件
   const handleChange = () => {
     emit('change', modelValue.value)
     emit('input', modelValue.value)
+
+    runValidate('change')
   }
 
   // 外部更新modalValue，同步到本地modelValue
