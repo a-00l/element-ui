@@ -3,8 +3,8 @@
     class="my-form-item"
     :class="{
       'my-form-item--loading': stateItem.loading,
-      'my-form-item--success': stateItem.state === 'success',
-      'my-form-item--error': stateItem.state === 'error',
+      'is-success': stateItem.state === 'success',
+      'is-error': stateItem.state === 'error',
       'is-required': isRequired,
     }"
   >

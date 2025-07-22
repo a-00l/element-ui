@@ -45,10 +45,6 @@
   box-shadow: 0 0 0 1px var(--my-color-danger) inset;
 }
 
-.my-form-item.is-success .my-input__wrapper {
-  box-shadow: 0 0 0 1px var(--my-color-success) inset;
-}
-
 .my-form-item.is-required > .my-form-item__label::before {
   content: '*';
   color: var(--my-color-danger);
