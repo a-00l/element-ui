@@ -5,9 +5,10 @@
       'my-form-item--loading': stateItem.loading,
       'my-form-item--success': stateItem.state === 'success',
       'my-form-item--error': stateItem.state === 'error',
+      'is-required': isRequired,
     }"
   >
-    <label>
+    <label class="my-form-item__label">
       <slot
         name="label"
         :label="label"
@@ -58,6 +59,11 @@
       return []
     }
   })
+
+  const isRequired = () => {
+    const rules = rulesContext.value
+    return rules ? rules.some((rule) => rule.required) : false
+  }
 
   // 获取model
   const modelContext = computed(() => {
