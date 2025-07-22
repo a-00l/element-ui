@@ -191,7 +191,7 @@
   import Form from './components/Form/Form.vue'
   import FormItem from './components/Form/FormItem.vue'
   import type { RuleItem } from 'async-validator'
-  import type { FormRules } from './components/Form/types'
+  import type { FormInstance, FormRules } from './components/Form/types'
 
   const model = reactive({
     email: '123',
@@ -206,20 +206,9 @@
     password: [{ type: 'string', required: true, trigger: 'blur' }],
   } as FormRules
 
-  const formRef = ref()
-  onMounted(() => {
-    formRef.value
-      .validate()
-      .then(() => {
-        console.log('校验成功')
-      })
-      .catch((e: any) => {
-        console.log(e)
-      })
-  })
-
+  const formRef = ref<FormInstance>()
   const reset = () => {
-    formRef.value.clearValidate()
+    formRef.value?.resetFields()
   }
 </script>
 
@@ -246,6 +235,7 @@
         <input
           type="text"
           @blur="validate()"
+          v-model="model.password"
         />
       </template>
     </FormItem>

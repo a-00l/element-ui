@@ -13,7 +13,7 @@ export interface FormItemProps {
 }
 
 export interface FormItemContext {
-  validate: (trigger?: string) => any;
+  validate: (trigger?: string) => Promise<any>;
   prop: string;
   clearValidate(): void;
   resetField(): void;
@@ -40,6 +40,11 @@ export interface FormInstance {
   resetFields: (prop?: string[]) => void;
 }
 
+export interface FormItemInstance {
+  validate: () => Promise<any>;
+  clearValidate: (prop?: string[]) => void;
+  resetField: (prop?: string[]) => void;
+}
 export const FormContextKey: InjectionKey<FormContext> = Symbol('FormContextKey')
 
 export const FormItemContextKey: InjectionKey<FormItemContext> = Symbol('FormItemContextKey')

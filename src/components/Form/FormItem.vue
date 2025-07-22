@@ -34,6 +34,7 @@
     FormItemContextKey,
     type FormContext,
     type FormItemContext,
+    type FormItemInstance,
     type FormItemProps,
     type FormValidateFailure,
   } from './types'
@@ -91,7 +92,7 @@
 
   // 用于校验
   const validate = (trigger?: string) => {
-    if (!props.prop) return
+    if (!props.prop) return Promise.resolve()
     stateItem.loading = true
     // 添加字段校验规则
     const validator = new Schema({
@@ -157,6 +158,11 @@
   })
 
   provide(FormItemContextKey, context)
+  defineExpose<FormItemInstance>({
+    validate,
+    clearValidate,
+    resetField,
+  })
 </script>
 
 <style lang="scss" scoped></style>

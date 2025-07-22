@@ -130,7 +130,9 @@
   const formItem = inject(FormItemContextKey)
   // 触发表单验证
   const runValidate = (trigger?: string) => {
-    formItem?.validate(trigger)
+    formItem?.validate(trigger).catch((e) => {
+      console.log('验证错误', e.errors)
+    })
   }
 
   const inputRef = ref<HTMLInputElement>()
