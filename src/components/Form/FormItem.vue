@@ -33,6 +33,7 @@
     FormContextKey,
     FormItemContextKey,
     type FormContext,
+    type FormItemContext,
     type FormItemProps,
     type FormValidateFailure,
   } from './types'
@@ -41,17 +42,6 @@
   const props = defineProps<FormItemProps>()
   const { model, rules, addField, removeField } = inject(FormContextKey) as FormContext
 
-  onMounted(() => {
-    if (props.prop) {
-      addField({ prop: props.prop, validate })
-    }
-  })
-
-  onUnmounted(() => {
-    if (props.prop) {
-      removeField({ prop: props.prop, validate })
-    }
-  })
   // 记录状态
   const stateItem = reactive({
     state: '',
@@ -59,6 +49,8 @@
     loading: false,
   })
 
+  // 记录初始值
+  let initInnerValue: any = null
   // 获取rules
   const rulesContext = computed(() => {
     if (rules && props.prop && !isUndefineOrNull(rules[props.prop])) {
@@ -91,6 +83,8 @@
       return []
     }
   }
+
+  // 用于校验
   const validate = (trigger?: string) => {
     if (!props.prop) return
     stateItem.loading = true
@@ -99,7 +93,8 @@
       [props.prop]: getFormItemRules(trigger),
     })
 
-    validator
+    // 校验
+    return validator
       .validate({ [props.prop]: modelContext.value })
       .then(() => {
         stateItem.state = 'success'
@@ -108,6 +103,7 @@
       .catch((e: FormValidateFailure) => {
         stateItem.state = 'error'
         stateItem.errMessage = e.errors && e.errors.length > 0 ? e.errors[0].message || '' : ''
+        return Promise.reject(e)
       })
       .finally(() => {
         stateItem.loading = false
@@ -118,9 +114,44 @@
     return value === undefined || value === null
   }
 
-  provide(FormItemContextKey, {
+  // 清除校验结果
+  const clearValidate = () => {
+    stateItem.errMessage = ''
+    stateItem.loading = false
+    stateItem.state = 'init'
+  }
+
+  // 重置表单
+  const resetField = () => {
+    clearValidate()
+    // 重置为初始值
+    if (model && props.prop && !isUndefineOrNull(model[props.prop])) {
+      model[props.prop] = initInnerValue
+    }
+  }
+
+  const context: FormItemContext = {
     validate,
+    prop: props.prop || '',
+    clearValidate,
+    resetField,
+  }
+
+  onMounted(() => {
+    if (props.prop) {
+      addField(context)
+      // 保存初始值
+      initInnerValue = modelContext.value
+    }
   })
+
+  onUnmounted(() => {
+    if (props.prop) {
+      removeField(context)
+    }
+  })
+
+  provide(FormItemContextKey, context)
 </script>
 
 <style lang="scss" scoped></style>
