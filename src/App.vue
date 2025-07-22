@@ -194,7 +194,7 @@
   import type { FormRules } from './components/Form/types'
 
   const model = reactive({
-    email: '',
+    email: '123',
     password: '',
   })
 
@@ -205,12 +205,29 @@
     ],
     password: [{ type: 'string', required: true, trigger: 'blur' }],
   } as FormRules
+
+  const formRef = ref()
+  onMounted(() => {
+    formRef.value
+      .validate()
+      .then(() => {
+        console.log('校验成功')
+      })
+      .catch((e: any) => {
+        console.log(e)
+      })
+  })
+
+  const reset = () => {
+    formRef.value.clearValidate()
+  }
 </script>
 
 <template>
   <Form
     :model="model"
     :rules="rules"
+    ref="formRef"
   >
     <FormItem
       label="my form"
@@ -234,7 +251,7 @@
     </FormItem>
     <FormItem label="my Button">
       <Button>submit</Button>
-      <Button>reset</Button>
+      <Button @click="reset">reset</Button>
     </FormItem>
     {{ model }}
   </Form>
